@@ -15,6 +15,18 @@
   60% { transform: translateY(-4px); }
 }
 
+/* ─── FLOATING STEP NAVIGATION ─── */
+.step-nav {
+  position: fixed;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 /* ─── MOBILE BREAKPOINT (≤768px) ─── */
 @media (max-width: 768px) {
 
@@ -139,6 +151,43 @@
     margin-bottom: 10px !important;
     padding-bottom: 8px !important;
   }
+
+  /* 3-column engagement path grids → 1 column */
+  .rg-3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Market/constraint card text → smaller fonts so text stays inside */
+  .rg-detail-3 .detail-label {
+    font-size: 20px !important;
+  }
+  .rg-detail-3 .detail-sub {
+    font-size: 15px !important;
+  }
+  .rg-detail-3 .detail-desc {
+    font-size: 15px !important;
+  }
+  .rg-detail-3 .detail-action {
+    font-size: 14px !important;
+  }
+
+  /* Prevent text overflow in all card containers */
+  .text-wrap {
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    min-width: 0 !important;
+  }
+
+  /* Floating nav → smaller on mobile */
+  .step-nav {
+    right: 6px !important;
+    gap: 4px !important;
+  }
+  .step-nav button {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 10px !important;
+  }
 }
 
 /* ─── SMALL MOBILE (≤480px) ─── */
@@ -151,5 +200,14 @@
   }
   .header-inner img {
     height: 64px !important;
+  }
+  .step-nav {
+    right: 4px !important;
+    gap: 3px !important;
+  }
+  .step-nav button {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 9px !important;
   }
 }

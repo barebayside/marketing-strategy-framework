@@ -2867,7 +2867,7 @@ function FunnelActionPlanSummary({ selectedChannelFunnels, audienceModeId }) {
       })}
 
       {/* Summary stats */}
-      <div style={{ borderTop: "1px solid rgba(52,211,153,0.15)", marginTop: 10, paddingTop: 16, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+      <div className="rg-3" style={{ borderTop: "1px solid rgba(52,211,153,0.15)", marginTop: 10, paddingTop: 16, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
         <div style={{ textAlign: "center" }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#94a3b8", letterSpacing: 1, marginBottom: 4 }}>TOTAL FUNNELS</div>
           <div style={{ fontFamily: "var(--font-display)", fontSize: 28, color: "#34d399" }}>{allSelectedIds.length}</div>
@@ -3105,6 +3105,32 @@ export default function MarketingStrategyFramework() {
     <div style={{ background: "var(--bg)", minHeight: "100vh", fontFamily: "var(--font-body)", color: "var(--text)" }}>
       <style>{styles}</style>
 
+      {/* Floating step navigation */}
+      {activeTab === "framework" && (
+        <div className="step-nav">
+          {[
+            { id: "step-00", label: "00", done: !!productType, color: "#fb923c", visible: true },
+            { id: "step-01", label: "01", done: !!market, color: "#38bdf8", visible: !!productType },
+            { id: "step-02", label: "02", done: !!constraint, color: "#f59e0b", visible: !!market },
+            { id: "step-03", label: "03", done: !!budget, color: "#34d399", visible: !!(market && constraint) },
+            { id: "step-04", label: "04", done: Object.keys(audienceFunnelPicks).length > 0, color: "#f472b6", visible: !!(market && constraint && budget) },
+          ].filter(s => s.visible).map(step => (
+            <button key={step.id} onClick={() => document.getElementById(step.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })} style={{
+              width: 38, height: 38, borderRadius: "50%",
+              background: step.done ? `${step.color}20` : "rgba(13,21,37,0.92)",
+              border: `2px solid ${step.done ? step.color : "rgba(99,179,237,0.2)"}`,
+              color: step.done ? step.color : "#64748b",
+              fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: "bold",
+              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "all 0.2s", backdropFilter: "blur(8px)",
+              boxShadow: step.done ? `0 0 10px ${step.color}20` : "0 2px 8px rgba(0,0,0,0.3)",
+            }}>
+              {step.done ? "✓" : step.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Header */}
       <div className="rp-header" style={{ background: "linear-gradient(180deg,#0d1525 0%,#080c14 100%)", borderBottom: "1px solid var(--border)", padding: "22px 28px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -3207,8 +3233,11 @@ export default function MarketingStrategyFramework() {
               <div className="step-header" style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
                 <span style={{ color: "#94a3b8" }}>STEP 00 — </span><span style={{ color: "#fb923c" }}>PRODUCT / SERVICE TYPE</span>
               </div>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#fb923c", letterSpacing: 1, marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>
+                👇 SELECT WHAT BEST DESCRIBES YOUR BUSINESS
+              </div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
-                Select the option below that best describes your business. This determines which strategies and funnels apply to you.
+                Choose one option below. This determines which strategies and funnels apply to you.
               </div>
               <div className="rg-cards" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 10 }}>
                 {PRODUCT_TYPES.map(pt => (
@@ -3255,8 +3284,11 @@ export default function MarketingStrategyFramework() {
               <div className="step-header" style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
                 <span style={{ color: "#94a3b8" }}>STEP 01 — </span><span style={{ color: "#38bdf8" }}>MARKET TEMPERATURE</span>
               </div>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#38bdf8", letterSpacing: 1, marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>
+                👇 SELECT THE MARKET TEMPERATURE THAT APPLIES
+              </div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
-                Market temperature is a relationship status, not a demographic. The same person can be cold to your brand but hot in the broader category. Click to select, click again to expand diagnostic criteria.
+                Market temperature is a relationship status, not a demographic. Click to select, click again to expand diagnostic criteria.
               </div>
               <div style={{ display: "grid", gap: 8 }}>
                 {MARKET_CONDITIONS.map(m => (
@@ -3270,12 +3302,12 @@ export default function MarketingStrategyFramework() {
                       {market===m.id && <div style={{ position:"absolute", top:0, left:0, bottom:0, width:3, background:m.hex }} />}
                       <div className="rg-detail-3" style={{ display:"grid", gridTemplateColumns:"auto 1fr auto", gap:14, alignItems:"center" }}>
                         <div style={{ fontSize:32 }}>{m.icon}</div>
-                        <div>
-                          <div style={{ fontFamily:"var(--font-display)", fontSize:27, color:market===m.id?m.hex:"#e2e8f0", letterSpacing:1 }}>{m.label}</div>
-                          <div style={{ fontFamily:"var(--font-mono)", fontSize:20, color:"#94a3b8", marginTop:2 }}>{m.short}</div>
+                        <div className="text-wrap">
+                          <div className="detail-label" style={{ fontFamily:"var(--font-display)", fontSize:27, color:market===m.id?m.hex:"#e2e8f0", letterSpacing:1 }}>{m.label}</div>
+                          <div className="detail-sub" style={{ fontFamily:"var(--font-mono)", fontSize:20, color:"#94a3b8", marginTop:2 }}>{m.short}</div>
                           <div style={{ fontFamily:"var(--font-mono)", fontSize:15, color:"#7a9bbf", marginTop:6 }}>{m.stage} stage → {m.funnelPage}</div>
                         </div>
-                        <div style={{ fontFamily:"var(--font-mono)", fontSize:19, color:"#7a9bbf", textAlign:"right" }}>
+                        <div className="detail-action" style={{ fontFamily:"var(--font-mono)", fontSize:19, color:"#7a9bbf", textAlign:"right" }}>
                           {market===m.id ? (expandedMarket===m.id?"▲ HIDE":"▼ DETAILS") : "▼ SELECT"}
                         </div>
                       </div>
@@ -3298,8 +3330,11 @@ export default function MarketingStrategyFramework() {
                 <div className="step-header" style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
                   <span style={{ color: "#94a3b8" }}>STEP 02 — </span><span style={{ color: "#f59e0b" }}>YOUR CURRENT BOTTLENECK</span>
                 </div>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#f59e0b", letterSpacing: 1, marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>
+                  👇 SELECT YOUR BIGGEST BOTTLENECK
+                </div>
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
-                  Everyone wants profit — but only one constraint is actually choking your growth right now. Misidentify it and you'll spend money solving the wrong problem. This is the Theory of Constraints applied directly to marketing: remove the binding constraint first, and everything else improves faster.
+                  Only one constraint is choking your growth right now. Misidentify it and you'll spend money solving the wrong problem. Select the one that applies most.
                 </div>
                 <div style={{ display: "grid", gap: 8 }}>
                   {CONSTRAINTS.map(c => (
@@ -3313,15 +3348,15 @@ export default function MarketingStrategyFramework() {
                         {constraint===c.id && <div style={{ position:"absolute", top:0, left:0, bottom:0, width:3, background:c.hex }} />}
                         <div className="rg-detail-3" style={{ display:"grid", gridTemplateColumns:"auto 1fr auto", gap:14, alignItems:"flex-start" }}>
                           <div style={{ fontSize:32, paddingTop:2 }}>{c.icon}</div>
-                          <div>
-                            <div style={{ fontFamily:"var(--font-display)", fontSize:27, color:constraint===c.id?c.hex:"#e2e8f0", letterSpacing:1 }}>{c.label}</div>
-                            <div style={{ fontFamily:"var(--font-mono)", fontSize:20, color:"#94a3b8", marginTop:2, marginBottom:6 }}>{c.subtitle}</div>
-                            <div style={{ fontFamily:"var(--font-mono)", fontSize:21, color:"#94a3b8", lineHeight:1.7 }}>{c.desc}</div>
+                          <div className="text-wrap">
+                            <div className="detail-label" style={{ fontFamily:"var(--font-display)", fontSize:27, color:constraint===c.id?c.hex:"#e2e8f0", letterSpacing:1 }}>{c.label}</div>
+                            <div className="detail-sub" style={{ fontFamily:"var(--font-mono)", fontSize:20, color:"#94a3b8", marginTop:2, marginBottom:6 }}>{c.subtitle}</div>
+                            <div className="detail-desc" style={{ fontFamily:"var(--font-mono)", fontSize:21, color:"#94a3b8", lineHeight:1.7 }}>{c.desc}</div>
                           </div>
                           <div style={{ textAlign:"right", paddingTop:2 }}>
                             <div style={{ fontFamily:"var(--font-mono)", fontSize:18, color:c.hex, letterSpacing:1, marginBottom:4 }}>MAPS TO</div>
-                            <div style={{ fontFamily:"var(--font-mono)", fontSize:20, color:"#94a3b8", marginBottom:8 }}>{c.stage}</div>
-                            <div style={{ fontFamily:"var(--font-mono)", fontSize:19, color:"#7a9bbf" }}>
+                            <div className="detail-sub" style={{ fontFamily:"var(--font-mono)", fontSize:20, color:"#94a3b8", marginBottom:8 }}>{c.stage}</div>
+                            <div className="detail-action" style={{ fontFamily:"var(--font-mono)", fontSize:19, color:"#7a9bbf" }}>
                               {constraint===c.id ? (expandedConstraint===c.id?"▲ HIDE":"▼ DETAILS") : "▼ SELECT"}
                             </div>
                           </div>
@@ -3345,8 +3380,11 @@ export default function MarketingStrategyFramework() {
                 <div className="step-header" style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
                   <span style={{ color: "#94a3b8" }}>STEP 03 — </span><span style={{ color: "#34d399" }}>AVAILABLE BUDGET</span>
                 </div>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#34d399", letterSpacing: 1, marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>
+                  👇 SELECT YOUR AVAILABLE BUDGET
+                </div>
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
-                  Budget determines your platform mix and scaling approach, not your strategic direction. Never commit more than you can sustain for a minimum of 90 days. Campaigns need time to accumulate data before optimisation is possible.
+                  Budget determines your platform mix, not your strategic direction. Never commit more than you can sustain for 90 days.
                 </div>
                 <div className="rg-budget" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
                   {BUDGET_LEVELS.map(b => (
@@ -3560,9 +3598,9 @@ export default function MarketingStrategyFramework() {
                           if (!mode || !funnel) return null;
 
                           return (
-                            <div key={modeId} style={{ border: `1px solid ${mode.hex}30`, borderRadius: 12, overflow: "hidden" }}>
+                            <div key={modeId} className="text-wrap" style={{ border: `1px solid ${mode.hex}30`, borderRadius: 12, overflow: "hidden" }}>
                               {/* Campaign header */}
-                              <div style={{ background: `${mode.hex}10`, padding: "12px 18px", display: "flex", alignItems: "center", gap: 10, borderBottom: `1px solid ${mode.hex}18` }}>
+                              <div style={{ background: `${mode.hex}10`, padding: "12px 18px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10, borderBottom: `1px solid ${mode.hex}18` }}>
                                 <span style={{ fontSize: 22 }}>{mode.icon}</span>
                                 <div>
                                   <div style={{ fontFamily: "var(--font-display)", fontSize: 18, color: mode.hex, letterSpacing: 1 }}>{mode.label}</div>
@@ -3582,7 +3620,7 @@ export default function MarketingStrategyFramework() {
                                     <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: pt.hex, letterSpacing: 2, marginBottom: 8 }}>
                                       ENGAGEMENT PATH — {modeId.toUpperCase()} AUDIENCE
                                     </div>
-                                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+                                    <div className="rg-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
                                       <div style={{ background: "#040810", borderRadius: 6, padding: "10px 12px", border: "1px solid rgba(255,255,255,0.05)" }}>
                                         <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#34d399", letterSpacing: 2, marginBottom: 3 }}>① FIRST ACTION</div>
                                         <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#94a3b8", lineHeight: 1.6 }}>{ep.action}</div>
@@ -4092,10 +4130,10 @@ export default function MarketingStrategyFramework() {
                 </div>
 
                 {/* Detailed selection cards */}
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10 }}>
+                <div className="rg-cards" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10 }}>
                   {/* Product Type */}
                   {pt && (
-                    <div style={{ background: `${pt.hex}06`, border: `1px solid ${pt.hex}20`, borderRadius: 10, padding: "14px 16px" }}>
+                    <div className="text-wrap" style={{ background: `${pt.hex}06`, border: `1px solid ${pt.hex}20`, borderRadius: 10, padding: "14px 16px" }}>
                       <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#8b9dc4", letterSpacing: 2, marginBottom: 6 }}>STEP 00 · PRODUCT TYPE</div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                         <span style={{ fontSize: 22 }}>{pt.icon}</span>
@@ -4109,7 +4147,7 @@ export default function MarketingStrategyFramework() {
                   )}
                   {/* Market */}
                   {mc && (
-                    <div style={{ background: `${mc.hex}06`, border: `1px solid ${mc.hex}20`, borderRadius: 10, padding: "14px 16px" }}>
+                    <div className="text-wrap" style={{ background: `${mc.hex}06`, border: `1px solid ${mc.hex}20`, borderRadius: 10, padding: "14px 16px" }}>
                       <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#8b9dc4", letterSpacing: 2, marginBottom: 6 }}>STEP 01 · MARKET TEMPERATURE</div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                         <span style={{ fontSize: 22 }}>{mc.icon}</span>
@@ -4123,7 +4161,7 @@ export default function MarketingStrategyFramework() {
                   )}
                   {/* Constraint */}
                   {cn && (
-                    <div style={{ background: `${cn.hex}06`, border: `1px solid ${cn.hex}20`, borderRadius: 10, padding: "14px 16px" }}>
+                    <div className="text-wrap" style={{ background: `${cn.hex}06`, border: `1px solid ${cn.hex}20`, borderRadius: 10, padding: "14px 16px" }}>
                       <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#8b9dc4", letterSpacing: 2, marginBottom: 6 }}>STEP 02 · YOUR BOTTLENECK</div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                         <span style={{ fontSize: 22 }}>{cn.icon}</span>
@@ -4135,7 +4173,7 @@ export default function MarketingStrategyFramework() {
                   )}
                   {/* Budget */}
                   {bl && (
-                    <div style={{ background: "rgba(52,211,153,0.04)", border: "1px solid rgba(52,211,153,0.15)", borderRadius: 10, padding: "14px 16px" }}>
+                    <div className="text-wrap" style={{ background: "rgba(52,211,153,0.04)", border: "1px solid rgba(52,211,153,0.15)", borderRadius: 10, padding: "14px 16px" }}>
                       <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#8b9dc4", letterSpacing: 2, marginBottom: 6 }}>STEP 03 · BUDGET</div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                         <span style={{ fontSize: 22 }}>{bl.icon}</span>
@@ -4187,7 +4225,7 @@ export default function MarketingStrategyFramework() {
                   <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", letterSpacing: 3, marginBottom: 18, paddingBottom: 12, borderBottom: "1px solid rgba(255,255,255,0.12)" }}>
                     03 — CAMPAIGN BLUEPRINT
                   </div>
-                  <div style={{ border: `2px solid ${strategy.color}30`, borderRadius: 12, background: `${strategy.color}05`, padding: "20px 22px", position: "relative", overflow: "hidden" }}>
+                  <div className="text-wrap" style={{ border: `2px solid ${strategy.color}30`, borderRadius: 12, background: `${strategy.color}05`, padding: "20px 22px", position: "relative", overflow: "hidden" }}>
                     <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg,${strategy.color},transparent)` }} />
                     <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(22px,3vw,34px)", color: "#e2e8f0", letterSpacing: 2, marginBottom: 6 }}>{strategy.title}</div>
                     <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", marginBottom: 16 }}>
@@ -4230,7 +4268,7 @@ export default function MarketingStrategyFramework() {
                     {/* Tactics */}
                     <div style={{ marginBottom: 14 }}>
                       <div style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#7a9bbf", letterSpacing: 2, marginBottom: 8 }}>KEY TACTICS</div>
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
+                      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
                         {strategy.tactics.map((t, i) => (
                           <div key={i} style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", display: "flex", gap: 8, lineHeight: 1.5 }}>
                             <span style={{ color: strategy.color, flexShrink: 0 }}>›</span>{t}
@@ -4301,9 +4339,9 @@ export default function MarketingStrategyFramework() {
                     if (!mode || !funnel) return null;
 
                     return (
-                      <div key={modeId} style={{ marginBottom: 20, border: `1px solid ${mode.hex}25`, borderRadius: 12, overflow: "hidden" }}>
+                      <div key={modeId} className="text-wrap" style={{ marginBottom: 20, border: `1px solid ${mode.hex}25`, borderRadius: 12, overflow: "hidden" }}>
                         {/* Campaign header */}
-                        <div style={{ background: `${mode.hex}10`, padding: "14px 18px", display: "flex", alignItems: "center", gap: 10, borderBottom: `1px solid ${mode.hex}18` }}>
+                        <div style={{ background: `${mode.hex}10`, padding: "14px 18px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10, borderBottom: `1px solid ${mode.hex}18` }}>
                           <span style={{ fontSize: 22 }}>{mode.icon}</span>
                           <div>
                             <div style={{ fontFamily: "var(--font-display)", fontSize: 18, color: mode.hex, letterSpacing: 1 }}>{mode.label}</div>
@@ -4323,7 +4361,7 @@ export default function MarketingStrategyFramework() {
                               <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: pt.hex, letterSpacing: 2, marginBottom: 8 }}>
                                 ENGAGEMENT PATH — {pt.label} + {modeId.toUpperCase()}
                               </div>
-                              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+                              <div className="rg-3" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
                                 <div style={{ background: "#040810", borderRadius: 6, padding: "10px 12px", border: "1px solid rgba(255,255,255,0.05)" }}>
                                   <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#34d399", letterSpacing: 2, marginBottom: 3 }}>① FIRST ACTION</div>
                                   <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#94a3b8", lineHeight: 1.6 }}>{modeEp.action}</div>
