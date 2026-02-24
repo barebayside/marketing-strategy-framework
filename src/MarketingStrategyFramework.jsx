@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, useEffect, Fragment } from "react";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap');
@@ -3071,6 +3071,23 @@ export default function MarketingStrategyFramework() {
   const strategy = market && constraint && budget ? getStrategy(market, constraint, budget) : null;
   const stageColors = { AWR: "#38bdf8", CON: "#f59e0b", SOL: "#34d399", RET: "#a78bfa" };
 
+  // Auto-switch to Your Plan tab when all strong-fit campaigns are selected
+  useEffect(() => {
+    if (!productType || !market || !constraint || !budget || activeTab !== "framework") return;
+    const strongCount = AUDIENCE_MODES.filter(m => {
+      const f = getAudienceFit(productType, m.id, budget);
+      return f?.score === "strong";
+    }).length;
+    const pickedCount = Object.keys(audienceFunnelPicks).length;
+    if (pickedCount >= strongCount && strongCount > 0) {
+      const timer = setTimeout(() => {
+        setActiveTab("your_plan");
+        window.scrollTo(0, 0);
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [audienceFunnelPicks, productType, market, constraint, budget, activeTab]);
+
   const selectMarket = (id) => {
     if (market === id) {
       setExpandedMarket(v => v === id ? null : id);
@@ -4110,6 +4127,148 @@ export default function MarketingStrategyFramework() {
                 </div>
               </div>
 
+              {/* ═══ GET PLAN EMAILED + ZOHO IMPLEMENTATION (moved to top) ═══ */}
+              <div style={{ marginBottom: 48 }}>
+                <div style={{
+                  background: "linear-gradient(135deg, rgba(56,189,248,0.10) 0%, rgba(167,139,250,0.10) 50%, rgba(52,211,153,0.10) 100%)",
+                  border: "2px solid rgba(56,189,248,0.35)", borderRadius: 18, padding: "16px 32px 40px", textAlign: "center",
+                  boxShadow: "0 0 40px rgba(56,189,248,0.08), 0 0 80px rgba(167,139,250,0.04), inset 0 1px 0 rgba(255,255,255,0.06)"
+                }}>
+                  <img className="email-cta-logo" src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 220, objectFit: "contain", marginBottom: -4, opacity: 0.95 }} />
+                  <div style={{ fontFamily: "var(--font-display)", fontSize: 30, color: "#e2e8f0", letterSpacing: 2, marginBottom: 10 }}>
+                    Get This Plan Emailed To You
+                  </div>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#c4d5e8", lineHeight: 1.9, marginBottom: 28, maxWidth: 540, margin: "0 auto 28px" }}>
+                    Receive your full campaign blueprint, funnel strategies, engagement paths, and implementation steps — plus Zoho templates and automation workflows to bring it all to life.
+                  </div>
+
+                  {/* ╔═══════════════════════════════════════════════════════════════╗
+                      ║  ZOHO FORM EMBED — PASTE YOUR FORM CODE BELOW               ║
+                      ║                                                               ║
+                      ║  Replace the placeholder <div> below with your Zoho form      ║
+                      ║  embed code (iframe or JS snippet).                           ║
+                      ║                                                               ║
+                      ║  Options:                                                     ║
+                      ║  • Zoho Forms: Settings → Share → Embed → Copy iframe         ║
+                      ║  • Zoho CRM Web Form: Setup → Web Forms → Embed              ║
+                      ║  • Zoho MA: Lead Gen → Forms → Get Embed Code                ║
+                      ╚═══════════════════════════════════════════════════════════════╝ */}
+                  <div id="zoho-form-embed" style={{ maxWidth: 500, margin: "0 auto" }}>
+                    {/* ── PLACEHOLDER FORM — Replace this entire <div> with your Zoho embed ── */}
+                    <div style={{ display: "flex", gap: 10 }}>
+                      <input
+                        type="email"
+                        placeholder="Enter your email address"
+                        style={{
+                          flex: 1, fontFamily: "var(--font-mono)", fontSize: 15, color: "#e2e8f0",
+                          background: "rgba(0,0,0,0.4)", border: "2px solid rgba(56,189,248,0.35)",
+                          borderRadius: 10, padding: "14px 18px", outline: "none",
+                        }}
+                      />
+                      <button
+                        style={{
+                          fontFamily: "var(--font-mono)", fontSize: 15, color: "#080c14",
+                          background: "linear-gradient(135deg, #38bdf8, #34d399)",
+                          border: "none", borderRadius: 10, padding: "14px 28px", cursor: "pointer",
+                          letterSpacing: 2, fontWeight: "bold", whiteSpace: "nowrap",
+                          boxShadow: "0 4px 20px rgba(56,189,248,0.3)",
+                        }}
+                      >
+                        SEND MY PLAN
+                      </button>
+                    </div>
+                    <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#8b9dc4", marginTop: 12, lineHeight: 1.6 }}>
+                      No spam. You'll receive your personalised campaign plan and Zoho implementation templates.
+                    </div>
+                    {/* ── END PLACEHOLDER — Your Zoho embed replaces everything above ── */}
+                  </div>
+                </div>
+
+                {/* Arrow connector to benefits */}
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 0 }}>
+                  <div style={{ width: 3, height: 32, background: "linear-gradient(180deg, rgba(56,189,248,0.5), rgba(52,211,153,0.5))" }} />
+                  <div style={{
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: 14,
+                    background: "linear-gradient(135deg, rgba(52,211,153,0.12), rgba(56,189,248,0.12))",
+                    border: "2px solid rgba(52,211,153,0.35)",
+                    borderRadius: 40, padding: "14px 36px",
+                    boxShadow: "0 0 30px rgba(52,211,153,0.1), 0 0 60px rgba(52,211,153,0.05)",
+                  }}>
+                    <span style={{ fontFamily: "var(--font-display)", fontSize: 28, color: "#34d399" }}>+</span>
+                    <span style={{ fontFamily: "var(--font-display)", fontSize: 24, color: "#34d399", letterSpacing: 3 }}>YOU ALSO GET</span>
+                    <span style={{ fontFamily: "var(--font-display)", fontSize: 28, color: "#34d399" }}>+</span>
+                  </div>
+                  <div style={{ width: 3, height: 32, background: "linear-gradient(180deg, rgba(52,211,153,0.5), rgba(52,211,153,0.15))" }} />
+                  <svg width="28" height="16" viewBox="0 0 28 16" style={{ marginBottom: 4 }}>
+                    <path d="M14 16L0 0h28z" fill="rgba(52,211,153,0.5)" />
+                  </svg>
+                </div>
+
+                {/* What you'll get */}
+                <div style={{ textAlign: "center", marginTop: 4, marginBottom: 16 }}>
+                  <div style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "#e2e8f0", letterSpacing: 2 }}>
+                    WHAT YOU'LL RECEIVE
+                  </div>
+                  <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#94a3b8", marginTop: 6 }}>
+                    Enter your email above to get all three delivered to your inbox
+                  </div>
+                </div>
+                {/* Three benefit cards */}
+                <div className="rg-benefits" style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr auto 1fr", gap: 0, alignItems: "stretch" }}>
+                  {[
+                    { icon: "📋", title: "YOUR FULL PLAN", desc: "Complete campaign blueprint with all selections, strategies, and engagement paths — ready to action", color: "#38bdf8", premium: false },
+                    { icon: "⚙️", title: "AUTOMATION TEMPLATES", subtitle: "Powered by Zoho", desc: "Pre-built CRM pipelines, Marketing Automation journeys, and email sequences — import directly into your Zoho account", color: "#f5c542", premium: true },
+                    { icon: "🚀", title: "IMPLEMENTATION GUIDE", desc: "Step-by-step setup instructions to launch your campaigns and start generating results with Zoho tools", color: "#f5c542", premium: true },
+                  ].map((item, i) => (
+                    <Fragment key={i}>
+                      <div style={{
+                        background: item.premium
+                          ? "linear-gradient(135deg, rgba(245,197,66,0.10) 0%, rgba(245,158,11,0.06) 100%)"
+                          : "var(--surface)",
+                        borderRadius: item.premium ? 16 : 14, padding: item.premium ? "26px 22px" : "22px 20px",
+                        border: item.premium ? "2px solid rgba(245,197,66,0.35)" : "1px solid rgba(56,189,248,0.15)",
+                        textAlign: "left", position: "relative", overflow: "hidden",
+                        boxShadow: item.premium ? "0 0 30px rgba(245,197,66,0.08), 0 0 60px rgba(245,158,11,0.04), inset 0 1px 0 rgba(255,255,255,0.08)" : "none",
+                      }}>
+                        {item.premium && <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #f5c542, #f59e0b, transparent)" }} />}
+                        <div style={{
+                          position: "absolute", top: 10, right: 10, fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: 1,
+                          padding: "3px 10px", borderRadius: item.premium ? 20 : 4, fontWeight: "bold",
+                          background: item.premium ? "linear-gradient(135deg, rgba(245,197,66,0.2), rgba(245,158,11,0.12))" : "rgba(56,189,248,0.1)",
+                          color: item.premium ? "#f5c542" : "#38bdf8",
+                          border: `1px solid ${item.premium ? "rgba(245,197,66,0.4)" : "rgba(56,189,248,0.2)"}`,
+                          boxShadow: item.premium ? "0 0 10px rgba(245,197,66,0.12)" : "none",
+                        }}>
+                          {item.premium ? "★ BONUS" : "INCLUDED"}
+                        </div>
+                        <div style={{ fontSize: item.premium ? 34 : 28, marginBottom: item.premium ? 12 : 10 }}>{item.icon}</div>
+                        <div style={{ fontFamily: "var(--font-mono)", fontSize: item.premium ? 16 : 14, color: item.premium ? "#f5c542" : "#38bdf8", letterSpacing: 1, marginBottom: item.subtitle ? 2 : 6, fontWeight: "bold" }}>{item.title}</div>
+                        {item.subtitle && <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#94a3b8", letterSpacing: 1, marginBottom: 6 }}>{item.subtitle}</div>}
+                        <div style={{ fontFamily: "var(--font-mono)", fontSize: item.premium ? 14 : 13, color: item.premium ? "#e2e8f0" : "#c4d5e8", lineHeight: 1.8 }}>{item.desc}</div>
+                      </div>
+                      {i < 2 && (
+                        <div className="benefit-separator" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "0 8px" }}>
+                          <div style={{
+                            width: 34, height: 34, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
+                            background: "linear-gradient(135deg, rgba(245,197,66,0.12), rgba(245,158,11,0.08))",
+                            border: "2px solid rgba(245,197,66,0.3)",
+                            fontFamily: "var(--font-display)", fontSize: 20, color: "#f5c542",
+                            boxShadow: "0 0 12px rgba(245,197,66,0.1)",
+                          }}>+</div>
+                        </div>
+                      )}
+                    </Fragment>
+                  ))}
+                </div>
+              </div>
+
+              {/* ═══ Divider: Your full plan is below ═══ */}
+              <div style={{ textAlign: "center", margin: "0 0 32px", padding: "16px 0", borderTop: "1px solid rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#94a3b8", letterSpacing: 2 }}>
+                  👇 YOUR FULL PLAN DETAILS BELOW
+                </div>
+              </div>
+
               {/* ═══ SECTION 1: STRATEGY SELECTIONS SUMMARY ═══ */}
               <div style={{ marginBottom: 48 }}>
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#94a3b8", letterSpacing: 3, marginBottom: 18, paddingBottom: 12, borderBottom: "1px solid rgba(255,255,255,0.12)" }}>
@@ -4638,144 +4797,6 @@ export default function MarketingStrategyFramework() {
                   </div>
                 );
               })()}
-
-              {/* ═══ SECTION 9: GET PLAN EMAILED + ZOHO IMPLEMENTATION ═══ */}
-              <div style={{ marginBottom: 48 }}>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#94a3b8", letterSpacing: 3, marginBottom: 18, paddingBottom: 12, borderBottom: "1px solid rgba(255,255,255,0.12)" }}>
-                  09 — GET YOUR PLAN
-                </div>
-                <div style={{
-                  background: "linear-gradient(135deg, rgba(56,189,248,0.10) 0%, rgba(167,139,250,0.10) 50%, rgba(52,211,153,0.10) 100%)",
-                  border: "2px solid rgba(56,189,248,0.35)", borderRadius: 18, padding: "16px 32px 40px", textAlign: "center",
-                  boxShadow: "0 0 40px rgba(56,189,248,0.08), 0 0 80px rgba(167,139,250,0.04), inset 0 1px 0 rgba(255,255,255,0.06)"
-                }}>
-                  <img className="email-cta-logo" src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 220, objectFit: "contain", marginBottom: -4, opacity: 0.95 }} />
-                  <div style={{ fontFamily: "var(--font-display)", fontSize: 30, color: "#e2e8f0", letterSpacing: 2, marginBottom: 10 }}>
-                    Get This Plan Emailed To You
-                  </div>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#c4d5e8", lineHeight: 1.9, marginBottom: 28, maxWidth: 540, margin: "0 auto 28px" }}>
-                    Receive your full campaign blueprint, funnel strategies, engagement paths, and implementation steps — plus Zoho templates and automation workflows to bring it all to life.
-                  </div>
-
-                  {/* ╔═══════════════════════════════════════════════════════════════╗
-                      ║  ZOHO FORM EMBED — PASTE YOUR FORM CODE BELOW               ║
-                      ║                                                               ║
-                      ║  Replace the placeholder <div> below with your Zoho form      ║
-                      ║  embed code (iframe or JS snippet).                           ║
-                      ║                                                               ║
-                      ║  Options:                                                     ║
-                      ║  • Zoho Forms: Settings → Share → Embed → Copy iframe         ║
-                      ║  • Zoho CRM Web Form: Setup → Web Forms → Embed              ║
-                      ║  • Zoho MA: Lead Gen → Forms → Get Embed Code                ║
-                      ╚═══════════════════════════════════════════════════════════════╝ */}
-                  <div id="zoho-form-embed" style={{ maxWidth: 500, margin: "0 auto" }}>
-                    {/* ── PLACEHOLDER FORM — Replace this entire <div> with your Zoho embed ── */}
-                    <div style={{ display: "flex", gap: 10 }}>
-                      <input
-                        type="email"
-                        placeholder="Enter your email address"
-                        style={{
-                          flex: 1, fontFamily: "var(--font-mono)", fontSize: 15, color: "#e2e8f0",
-                          background: "rgba(0,0,0,0.4)", border: "2px solid rgba(56,189,248,0.35)",
-                          borderRadius: 10, padding: "14px 18px", outline: "none",
-                        }}
-                      />
-                      <button
-                        style={{
-                          fontFamily: "var(--font-mono)", fontSize: 15, color: "#080c14",
-                          background: "linear-gradient(135deg, #38bdf8, #34d399)",
-                          border: "none", borderRadius: 10, padding: "14px 28px", cursor: "pointer",
-                          letterSpacing: 2, fontWeight: "bold", whiteSpace: "nowrap",
-                          boxShadow: "0 4px 20px rgba(56,189,248,0.3)",
-                        }}
-                      >
-                        SEND MY PLAN
-                      </button>
-                    </div>
-                    <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#8b9dc4", marginTop: 12, lineHeight: 1.6 }}>
-                      No spam. You'll receive your personalised campaign plan and Zoho implementation templates.
-                    </div>
-                    {/* ── END PLACEHOLDER — Your Zoho embed replaces everything above ── */}
-                  </div>
-                </div>
-
-                {/* Arrow connector from email CTA to benefits */}
-                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 0 }}>
-                  <div style={{ width: 3, height: 32, background: "linear-gradient(180deg, rgba(56,189,248,0.5), rgba(52,211,153,0.5))" }} />
-                  <div style={{
-                    display: "flex", alignItems: "center", justifyContent: "center", gap: 14,
-                    background: "linear-gradient(135deg, rgba(52,211,153,0.12), rgba(56,189,248,0.12))",
-                    border: "2px solid rgba(52,211,153,0.35)",
-                    borderRadius: 40, padding: "14px 36px",
-                    boxShadow: "0 0 30px rgba(52,211,153,0.1), 0 0 60px rgba(52,211,153,0.05)",
-                  }}>
-                    <span style={{ fontFamily: "var(--font-display)", fontSize: 28, color: "#34d399" }}>+</span>
-                    <span style={{ fontFamily: "var(--font-display)", fontSize: 24, color: "#34d399", letterSpacing: 3 }}>YOU ALSO GET</span>
-                    <span style={{ fontFamily: "var(--font-display)", fontSize: 28, color: "#34d399" }}>+</span>
-                  </div>
-                  <div style={{ width: 3, height: 32, background: "linear-gradient(180deg, rgba(52,211,153,0.5), rgba(52,211,153,0.15))" }} />
-                  <svg width="28" height="16" viewBox="0 0 28 16" style={{ marginBottom: 4 }}>
-                    <path d="M14 16L0 0h28z" fill="rgba(52,211,153,0.5)" />
-                  </svg>
-                </div>
-
-                {/* What you'll get */}
-                <div style={{ textAlign: "center", marginTop: 4, marginBottom: 16 }}>
-                  <div style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "#e2e8f0", letterSpacing: 2 }}>
-                    WHAT YOU'LL RECEIVE
-                  </div>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#94a3b8", marginTop: 6 }}>
-                    Enter your email above to get all three delivered to your inbox
-                  </div>
-                </div>
-                {/* Three benefit cards — bonus items get gold premium feel */}
-                <div className="rg-benefits" style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr auto 1fr", gap: 0, alignItems: "stretch" }}>
-                  {[
-                    { icon: "📋", title: "YOUR FULL PLAN", desc: "Complete campaign blueprint with all selections, strategies, and engagement paths — ready to action", color: "#38bdf8", premium: false },
-                    { icon: "⚙️", title: "AUTOMATION TEMPLATES", subtitle: "Powered by Zoho", desc: "Pre-built CRM pipelines, Marketing Automation journeys, and email sequences — import directly into your Zoho account", color: "#f5c542", premium: true },
-                    { icon: "🚀", title: "IMPLEMENTATION GUIDE", desc: "Step-by-step setup instructions to launch your campaigns and start generating results with Zoho tools", color: "#f5c542", premium: true },
-                  ].map((item, i) => (
-                    <Fragment key={i}>
-                      <div style={{
-                        background: item.premium
-                          ? "linear-gradient(135deg, rgba(245,197,66,0.10) 0%, rgba(245,158,11,0.06) 100%)"
-                          : "var(--surface)",
-                        borderRadius: item.premium ? 16 : 14, padding: item.premium ? "26px 22px" : "22px 20px",
-                        border: item.premium ? "2px solid rgba(245,197,66,0.35)" : "1px solid rgba(56,189,248,0.15)",
-                        textAlign: "left", position: "relative", overflow: "hidden",
-                        boxShadow: item.premium ? "0 0 30px rgba(245,197,66,0.08), 0 0 60px rgba(245,158,11,0.04), inset 0 1px 0 rgba(255,255,255,0.08)" : "none",
-                      }}>
-                        {item.premium && <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(90deg, #f5c542, #f59e0b, transparent)" }} />}
-                        <div style={{
-                          position: "absolute", top: 10, right: 10, fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: 1,
-                          padding: "3px 10px", borderRadius: item.premium ? 20 : 4, fontWeight: "bold",
-                          background: item.premium ? "linear-gradient(135deg, rgba(245,197,66,0.2), rgba(245,158,11,0.12))" : "rgba(56,189,248,0.1)",
-                          color: item.premium ? "#f5c542" : "#38bdf8",
-                          border: `1px solid ${item.premium ? "rgba(245,197,66,0.4)" : "rgba(56,189,248,0.2)"}`,
-                          boxShadow: item.premium ? "0 0 10px rgba(245,197,66,0.12)" : "none",
-                        }}>
-                          {item.premium ? "★ BONUS" : "INCLUDED"}
-                        </div>
-                        <div style={{ fontSize: item.premium ? 34 : 28, marginBottom: item.premium ? 12 : 10 }}>{item.icon}</div>
-                        <div style={{ fontFamily: "var(--font-mono)", fontSize: item.premium ? 16 : 14, color: item.premium ? "#f5c542" : "#38bdf8", letterSpacing: 1, marginBottom: item.subtitle ? 2 : 6, fontWeight: "bold" }}>{item.title}</div>
-                        {item.subtitle && <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#94a3b8", letterSpacing: 1, marginBottom: 6 }}>{item.subtitle}</div>}
-                        <div style={{ fontFamily: "var(--font-mono)", fontSize: item.premium ? 14 : 13, color: item.premium ? "#e2e8f0" : "#c4d5e8", lineHeight: 1.8 }}>{item.desc}</div>
-                      </div>
-                      {i < 2 && (
-                        <div className="benefit-separator" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "0 8px" }}>
-                          <div style={{
-                            width: 34, height: 34, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
-                            background: "linear-gradient(135deg, rgba(245,197,66,0.12), rgba(245,158,11,0.08))",
-                            border: "2px solid rgba(245,197,66,0.3)",
-                            fontFamily: "var(--font-display)", fontSize: 20, color: "#f5c542",
-                            boxShadow: "0 0 12px rgba(245,197,66,0.1)",
-                          }}>+</div>
-                        </div>
-                      )}
-                    </Fragment>
-                  ))}
-                </div>
-              </div>
 
               {/* ═══ BACK TO SELECTOR ═══ */}
               <div style={{ textAlign: "center", paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
