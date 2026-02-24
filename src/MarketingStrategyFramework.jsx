@@ -3195,13 +3195,20 @@ export default function MarketingStrategyFramework() {
               ))}
             </div>
 
+            {/* START HERE prompt */}
+            <div style={{ textAlign: "center", padding: "20px 0 24px", marginBottom: 8 }}>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(20px,4vw,28px)", color: "#38bdf8", letterSpacing: 3, marginBottom: 8 }}>BUILD YOUR STRATEGY IN 5 STEPS</div>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#94a3b8", lineHeight: 1.7, maxWidth: 500, margin: "0 auto", marginBottom: 16 }}>Select one option at each step below. Your personalised marketing plan will be built as you go.</div>
+              <div style={{ fontSize: 28, animation: "bounce 2s infinite" }}>👇</div>
+            </div>
+
             {/* STEP 0 — PRODUCT / SERVICE TYPE */}
             <div id="step-00" className="step-container" style={{ marginBottom: 22 }}>
               <div className="step-header" style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
                 <span style={{ color: "#94a3b8" }}>STEP 00 — </span><span style={{ color: "#fb923c" }}>PRODUCT / SERVICE TYPE</span>
               </div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
-                Your product or service type is the first filter. It determines which audience modes are a natural fit, which have friction, and which are incompatible with your budget. Select the closest match — this grades every subsequent step.
+                Select the option below that best describes your business. This determines which strategies and funnels apply to you.
               </div>
               <div className="rg-cards" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 10 }}>
                 {PRODUCT_TYPES.map(pt => (
@@ -3232,6 +3239,16 @@ export default function MarketingStrategyFramework() {
                   </button>
                 ))}
               </div>
+              {!productType && (
+                <div style={{ textAlign: "center", padding: "18px 0 4px", fontFamily: "var(--font-mono)", fontSize: 13, color: "#fb923c", letterSpacing: 2 }}>
+                  👆 TAP ONE TO BEGIN
+                </div>
+              )}
+              {productType && (
+                <div style={{ textAlign: "center", padding: "18px 0 4px", fontFamily: "var(--font-mono)", fontSize: 13, color: "#34d399", letterSpacing: 2 }}>
+                  ✓ SELECTED — SCROLL DOWN TO STEP 01 👇
+                </div>
+              )}
             </div>
             {productType && (
             <div id="step-01" style={{ marginBottom: 22 }} className="fade-in step-container">
@@ -3267,6 +3284,11 @@ export default function MarketingStrategyFramework() {
                   </div>
                 ))}
               </div>
+              {market && (
+                <div style={{ textAlign: "center", padding: "18px 0 4px", fontFamily: "var(--font-mono)", fontSize: 13, color: "#34d399", letterSpacing: 2 }}>
+                  ✓ SELECTED — SCROLL DOWN TO STEP 02 👇
+                </div>
+              )}
             </div>
             )}
 
@@ -3309,6 +3331,11 @@ export default function MarketingStrategyFramework() {
                     </div>
                   ))}
                 </div>
+                {constraint && (
+                  <div style={{ textAlign: "center", padding: "18px 0 4px", fontFamily: "var(--font-mono)", fontSize: 13, color: "#34d399", letterSpacing: 2 }}>
+                    ✓ SELECTED — SCROLL DOWN TO STEP 03 👇
+                  </div>
+                )}
               </div>
             )}
 
@@ -3335,6 +3362,11 @@ export default function MarketingStrategyFramework() {
                     </button>
                   ))}
                 </div>
+                {budget && (
+                  <div style={{ textAlign: "center", padding: "18px 0 4px", fontFamily: "var(--font-mono)", fontSize: 13, color: "#34d399", letterSpacing: 2 }}>
+                    ✓ SELECTED — SCROLL DOWN TO STEP 04 👇
+                  </div>
+                )}
               </div>
             )}
 
