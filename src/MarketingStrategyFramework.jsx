@@ -4129,7 +4129,7 @@ export default function MarketingStrategyFramework() {
 
               {/* ═══ GET PLAN EMAILED + ZOHO IMPLEMENTATION (moved to top) ═══ */}
               <div style={{ marginBottom: 48 }}>
-                <div style={{
+                <div className="email-cta-box" style={{
                   background: "linear-gradient(135deg, rgba(56,189,248,0.10) 0%, rgba(167,139,250,0.10) 50%, rgba(52,211,153,0.10) 100%)",
                   border: "2px solid rgba(56,189,248,0.35)", borderRadius: 18, padding: "16px 32px 40px", textAlign: "center",
                   boxShadow: "0 0 40px rgba(56,189,248,0.08), 0 0 80px rgba(167,139,250,0.04), inset 0 1px 0 rgba(255,255,255,0.06)"
@@ -4155,14 +4155,14 @@ export default function MarketingStrategyFramework() {
                       ╚═══════════════════════════════════════════════════════════════╝ */}
                   <div id="zoho-form-embed" style={{ maxWidth: 500, margin: "0 auto" }}>
                     {/* ── PLACEHOLDER FORM — Replace this entire <div> with your Zoho embed ── */}
-                    <div style={{ display: "flex", gap: 10 }}>
+                    <div className="email-form-row" style={{ display: "flex", gap: 10 }}>
                       <input
                         type="email"
                         placeholder="Enter your email address"
                         style={{
                           flex: 1, fontFamily: "var(--font-mono)", fontSize: 15, color: "#e2e8f0",
                           background: "rgba(0,0,0,0.4)", border: "2px solid rgba(56,189,248,0.35)",
-                          borderRadius: 10, padding: "14px 18px", outline: "none",
+                          borderRadius: 10, padding: "14px 18px", outline: "none", minWidth: 0,
                         }}
                       />
                       <button

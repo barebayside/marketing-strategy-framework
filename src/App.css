@@ -178,6 +178,20 @@
     min-width: 0 !important;
   }
 
+  /* Email form → stack vertically on mobile */
+  .email-form-row {
+    flex-direction: column !important;
+  }
+  .email-form-row button {
+    width: 100% !important;
+    padding: 14px 20px !important;
+  }
+
+  /* Email CTA container → less horizontal padding */
+  .email-cta-box {
+    padding: 16px 14px 32px !important;
+  }
+
   /* Step 04: hide expanded audience detail panel on mobile */
   .audience-detail-wrap {
     display: none !important;
