@@ -178,6 +178,21 @@
     min-width: 0 !important;
   }
 
+  /* Step 04: hide expanded audience detail panel on mobile */
+  .audience-detail-wrap {
+    display: none !important;
+  }
+
+  /* Step 04: hide funnel picker right-side meta (complexity/time) */
+  .funnel-pick-meta {
+    display: none !important;
+  }
+
+  /* Step 04: hide fit reason + platform tags on mobile */
+  .audience-extra {
+    display: none !important;
+  }
+
   /* Floating nav → smaller on mobile */
   .step-nav {
     right: 6px !important;

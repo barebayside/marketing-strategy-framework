@@ -3086,7 +3086,7 @@ export default function MarketingStrategyFramework() {
   };
   const selectAudience = (id) => {
     if (audience === id) setExpandedAudience(v => v === id ? null : id);
-    else { setAudience(id); setExpandedAudience(id); setTimeout(() => document.getElementById('step-04')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }
+    else { setAudience(id); setExpandedAudience(id); setTimeout(() => document.getElementById(`audience-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }
   };
 
   const handleToggleChannelFunnel = (channelId, funnelId) => {
@@ -3454,7 +3454,7 @@ export default function MarketingStrategyFramework() {
                     const pickedChannel = pick ? CHANNEL_STRATEGIES.find(c => c.id === pick.channelId) : null;
 
                     return (
-                      <div key={mode.id}>
+                      <div key={mode.id} id={`audience-${mode.id}`}>
                         <button onClick={() => !isConflict && selectAudience(mode.id)} style={{
                           width: "100%", background: isExpanded ? `${mode.hex}0a` : isConflict ? "rgba(20,20,30,0.5)" : "var(--surface)",
                           border: `2px solid ${isExpanded ? mode.hex : pick ? "#34d39940" : isConflict ? "rgba(60,60,80,0.4)" : "rgba(99,179,237,0.1)"}`,
@@ -3477,13 +3477,15 @@ export default function MarketingStrategyFramework() {
                                 )}
                               </div>
                               <div style={{ fontFamily:"var(--font-mono)", fontSize:14, color:"#94a3b8", marginBottom:6 }}>{mode.subtitle}</div>
-                              {fit && (
-                                <div style={{ fontFamily:"var(--font-mono)", fontSize:13, color:"#94a3b8", lineHeight:1.6, marginBottom:8, paddingLeft:8, borderLeft:`2px solid ${fc.border}` }}>{fit.reason}</div>
-                              )}
-                              <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
-                                {mode.platforms.map(p => (
-                                  <span key={p} style={{ fontFamily:"var(--font-mono)", fontSize:13, padding:"2px 8px", background:`${mode.hex}${isConflict ? "08" : "12"}`, border:`1px solid ${mode.hex}${isConflict ? "15" : "28"}`, borderRadius:4, color: isConflict ? "#94a3b8" : mode.hex }}>{p}</span>
-                                ))}
+                              <div className="audience-extra">
+                                {fit && (
+                                  <div style={{ fontFamily:"var(--font-mono)", fontSize:13, color:"#94a3b8", lineHeight:1.6, marginBottom:8, paddingLeft:8, borderLeft:`2px solid ${fc.border}` }}>{fit.reason}</div>
+                                )}
+                                <div style={{ display:"flex", gap:6, flexWrap:"wrap" }}>
+                                  {mode.platforms.map(p => (
+                                    <span key={p} style={{ fontFamily:"var(--font-mono)", fontSize:13, padding:"2px 8px", background:`${mode.hex}${isConflict ? "08" : "12"}`, border:`1px solid ${mode.hex}${isConflict ? "15" : "28"}`, borderRadius:4, color: isConflict ? "#94a3b8" : mode.hex }}>{p}</span>
+                                  ))}
+                                </div>
                               </div>
                             </div>
                             <div style={{ fontFamily:"var(--font-mono)", fontSize:14, color:"#7a9bbf", textAlign:"right", whiteSpace:"nowrap" }}>
@@ -3492,8 +3494,10 @@ export default function MarketingStrategyFramework() {
                           </div>
                         </button>
 
-                        {/* Expanded: audience details */}
-                        {isExpanded && expandedAudience === mode.id && <AudienceDetail mode={mode} />}
+                        {/* Expanded: audience details — hidden on mobile */}
+                        <div className="audience-detail-wrap">
+                          {isExpanded && expandedAudience === mode.id && <AudienceDetail mode={mode} />}
+                        </div>
 
                         {/* Inline funnel picker — only for strong-fit modes when expanded */}
                         {isExpanded && isStrong && (() => {
@@ -3544,8 +3548,8 @@ export default function MarketingStrategyFramework() {
                                           <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#64748b", marginTop: 2 }}>{funnel.subtitle}</div>
                                         </div>
 
-                                        {/* Channel + meta */}
-                                        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0 }}>
+                                        {/* Channel + meta — hidden on mobile */}
+                                        <div className="funnel-pick-meta" style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0 }}>
                                           {ch && (
                                             <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, padding: "1px 6px", background: `${ch.hex}10`, border: `1px solid ${ch.hex}20`, borderRadius: 3, color: ch.hex, display: "flex", alignItems: "center", gap: 3 }}>
                                               <span style={{ fontSize: 10 }}>{ch.icon}</span> {ch.label}
