@@ -178,6 +178,14 @@
     min-width: 0 !important;
   }
 
+  /* Hide framework overview grid + "Build your strategy" prompt on mobile */
+  .framework-overview {
+    display: none !important;
+  }
+  .start-here-prompt {
+    display: none !important;
+  }
+
   /* Email form → stack vertically on mobile */
   .email-form-row {
     flex-direction: column !important;

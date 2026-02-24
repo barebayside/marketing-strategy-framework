@@ -3217,8 +3217,8 @@ export default function MarketingStrategyFramework() {
         <div style={{ transform: `scale(${zoom})`, transformOrigin: "top left", width: `${(1/zoom)*100}%` }}>
         {activeTab === "framework" && (
           <div>
-            {/* Framework Overview */}
-            <div className="rg-5" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 10, marginBottom: 26 }}>
+            {/* Framework Overview — hidden on mobile */}
+            <div className="rg-5 framework-overview" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 10, marginBottom: 26 }}>
               {[
                 { label: "STEP 00", title: "PRODUCT TYPE", items: ["High-ticket service", "Mid-ticket service", "Digital product", "Ecommerce", "SaaS / App", "Local service", "Community / Membership"], color: "#fb923c" },
                 { label: "STEP 01", title: "MARKET TEMPERATURE", items: ["Cold → No awareness", "Warm → Know problem, not you", "Hot → Raised their hand"], color: "#38bdf8" },
@@ -3238,8 +3238,8 @@ export default function MarketingStrategyFramework() {
               ))}
             </div>
 
-            {/* START HERE prompt */}
-            <div style={{ textAlign: "center", padding: "20px 0 24px", marginBottom: 8 }}>
+            {/* START HERE prompt — hidden on mobile */}
+            <div className="start-here-prompt" style={{ textAlign: "center", padding: "20px 0 24px", marginBottom: 8 }}>
               <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(20px,4vw,28px)", color: "#38bdf8", letterSpacing: 3, marginBottom: 8 }}>BUILD YOUR STRATEGY IN 5 STEPS</div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#94a3b8", lineHeight: 1.7, maxWidth: 500, margin: "0 auto", marginBottom: 16 }}>Select one option at each step below. Your personalised marketing plan will be built as you go.</div>
               <div style={{ fontSize: 28, animation: "bounce 2s infinite" }}>👇</div>
