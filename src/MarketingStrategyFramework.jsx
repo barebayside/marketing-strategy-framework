@@ -3172,10 +3172,11 @@ export default function MarketingStrategyFramework() {
         <div className="tab-inner" style={{ maxWidth: 1100, margin: "0 auto", display: "flex" }}>
           {[["your_plan","📋 YOUR PLAN"],["framework","STRATEGY SELECTOR"],["naming","NAMING CONVENTION"],["utm_map","UTM MAP"],["glossary","GLOSSARY"]].map(([t, label]) => {
             const isYourPlan = t === "your_plan";
+            const isPrimary = t === "your_plan" || t === "framework";
             const hasStrategy = !!(market && constraint && budget);
             const isActive = activeTab === t;
             return (
-              <button key={t} onClick={() => { if (isYourPlan && !hasStrategy) return; setActiveTab(t); }} style={{
+              <button key={t} className={isPrimary ? "tab-primary" : "tab-secondary"} onClick={() => { if (isYourPlan && !hasStrategy) return; setActiveTab(t); }} style={{
                 padding: "11px 18px", fontFamily: "var(--font-mono)", fontSize: 14, letterSpacing: 2,
                 background: isYourPlan && isActive ? "rgba(52,211,153,0.08)" : "transparent",
                 border: "none", cursor: isYourPlan && !hasStrategy ? "not-allowed" : "pointer", whiteSpace: "nowrap",
@@ -4008,9 +4009,9 @@ export default function MarketingStrategyFramework() {
                 ))}
               </div>
             </div>
-            <div style={{ background:"var(--surface)", borderRadius:14, border:"1px solid var(--border)", overflow:"hidden", marginBottom:18 }}>
+            <div className="table-scroll" style={{ background:"var(--surface)", borderRadius:14, border:"1px solid var(--border)", overflow:"auto", marginBottom:18 }}>
               <div style={{ padding:"12px 16px", borderBottom:"1px solid var(--border)", fontFamily:"var(--font-mono)", fontSize:18, color:"#94a3b8", letterSpacing:2 }}>UTM PARAMETER REFERENCE</div>
-              <table style={{ width:"100%", borderCollapse:"collapse" }}>
+              <table style={{ width:"100%", borderCollapse:"collapse", minWidth:520 }}>
                 <thead>
                   <tr style={{ background:"rgba(99,179,237,0.03)" }}>
                     {["Parameter","Maps To","Your Values","Example"].map(h => (
