@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;600;700;800&display=swap');
@@ -3062,6 +3062,8 @@ export default function MarketingStrategyFramework() {
   const [showAllFunnels, setShowAllFunnels] = useState(false);
   // Per-audience-mode funnel picks: { [modeId]: { funnelId, channelId } }
   const [audienceFunnelPicks, setAudienceFunnelPicks] = useState({});
+  // Desktop: which funnel is expanded for details in the Step 04 picker
+  const [expandedStepFunnel, setExpandedStepFunnel] = useState(null);
   const [activeTab, setActiveTab] = useState("framework");
   const [zoom, setZoom] = useState(1.0);
   const ZOOM_STEP = 0.1;
@@ -3071,22 +3073,30 @@ export default function MarketingStrategyFramework() {
   const strategy = market && constraint && budget ? getStrategy(market, constraint, budget) : null;
   const stageColors = { AWR: "#38bdf8", CON: "#f59e0b", SOL: "#34d399", RET: "#a78bfa" };
 
+  // Track previous pick count so auto-switch only fires on new completion, not on tab change
+  const prevPickCountRef = useRef(0);
+  const activeTabRef = useRef(activeTab);
+  activeTabRef.current = activeTab;
+
   // Auto-switch to Your Plan tab when all strong-fit campaigns are selected
   useEffect(() => {
-    if (!productType || !market || !constraint || !budget || activeTab !== "framework") return;
+    if (!productType || !market || !constraint || !budget) return;
     const strongCount = AUDIENCE_MODES.filter(m => {
       const f = getAudienceFit(productType, m.id, budget);
       return f?.score === "strong";
     }).length;
     const pickedCount = Object.keys(audienceFunnelPicks).length;
-    if (pickedCount >= strongCount && strongCount > 0) {
+    const prevCount = prevPickCountRef.current;
+    prevPickCountRef.current = pickedCount;
+    // Only auto-switch when picks JUST reached the threshold (not when navigating back)
+    if (pickedCount >= strongCount && strongCount > 0 && prevCount < strongCount && activeTabRef.current === "framework") {
       const timer = setTimeout(() => {
         setActiveTab("your_plan");
         window.scrollTo(0, 0);
       }, 800);
       return () => clearTimeout(timer);
     }
-  }, [audienceFunnelPicks, productType, market, constraint, budget, activeTab]);
+  }, [audienceFunnelPicks, productType, market, constraint, budget]);
 
   const selectMarket = (id) => {
     if (market === id) {
@@ -3103,7 +3113,7 @@ export default function MarketingStrategyFramework() {
   };
   const selectAudience = (id) => {
     if (audience === id) setExpandedAudience(v => v === id ? null : id);
-    else { setAudience(id); setExpandedAudience(id); setTimeout(() => document.getElementById(`audience-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }
+    else { setAudience(id); setExpandedAudience(id); setExpandedStepFunnel(null); setTimeout(() => document.getElementById(`audience-${id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }
   };
 
   const handleToggleChannelFunnel = (channelId, funnelId) => {
@@ -3531,31 +3541,70 @@ export default function MarketingStrategyFramework() {
                                   const isSelected = pick?.funnelId === funnel.id;
                                   const cfg = RELEVANCE_CONFIG[rel];
                                   const ch = CHANNEL_STRATEGIES.find(c => c.id === channelId);
+                                  const isFunnelExpanded = expandedStepFunnel === funnel.id;
                                   return (
-                                    <button key={funnel.id} onClick={(e) => {
-                                      e.stopPropagation();
-                                      if (isSelected) {
-                                        setAudienceFunnelPicks(prev => { const n = { ...prev }; delete n[mode.id]; return n; });
-                                      } else {
-                                        setAudienceFunnelPicks(prev => ({ ...prev, [mode.id]: { funnelId: funnel.id, channelId } }));
-                                        // Auto-collapse after picking so user can move to next mode
-                                        setAudience(null);
-                                      }
-                                    }} style={{
-                                      width: "100%", background: isSelected ? `${mode.hex}12` : "rgba(0,0,0,0.2)",
-                                      border: `1px solid ${isSelected ? mode.hex : "rgba(255,255,255,0.06)"}`,
-                                      borderRadius: 8, padding: "10px 14px", cursor: "pointer", textAlign: "left",
-                                      transition: "all 0.15s"
+                                    <div key={funnel.id} style={{
+                                      border: `1px solid ${isSelected ? mode.hex : isFunnelExpanded ? `${funnel.hex}60` : "rgba(255,255,255,0.06)"}`,
+                                      borderRadius: 8, overflow: "hidden",
+                                      background: isSelected ? `${mode.hex}12` : isFunnelExpanded ? `${funnel.hex}05` : "rgba(0,0,0,0.2)",
+                                      transition: "all 0.2s"
                                     }}>
-                                      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                                        {/* Selection indicator */}
-                                        <div style={{
-                                          width: 20, height: 20, borderRadius: "50%", flexShrink: 0,
-                                          border: `2px solid ${isSelected ? mode.hex : "#334155"}`,
-                                          background: isSelected ? mode.hex : "transparent",
-                                          display: "flex", alignItems: "center", justifyContent: "center",
-                                          fontSize: 12, color: "#080c14"
-                                        }}>{isSelected ? "✓" : ""}</div>
+                                      <div
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          // Desktop: click row to expand/collapse details
+                                          if (window.innerWidth > 768) {
+                                            setExpandedStepFunnel(isFunnelExpanded ? null : funnel.id);
+                                          } else {
+                                            // Mobile: click row to select directly
+                                            if (isSelected) {
+                                              setAudienceFunnelPicks(prev => { const n = { ...prev }; delete n[mode.id]; return n; });
+                                            } else {
+                                              setAudienceFunnelPicks(prev => ({ ...prev, [mode.id]: { funnelId: funnel.id, channelId } }));
+                                              setAudience(null);
+                                            }
+                                          }
+                                        }}
+                                        style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", cursor: "pointer" }}
+                                      >
+                                        {/* Selection indicator — click to select/deselect, stops propagation so expand doesn't fire */}
+                                        <div
+                                          onClick={(e) => {
+                                            e.stopPropagation();
+                                            if (isSelected) {
+                                              setAudienceFunnelPicks(prev => { const n = { ...prev }; delete n[mode.id]; return n; });
+                                            } else {
+                                              const newPicks = { ...audienceFunnelPicks, [mode.id]: { funnelId: funnel.id, channelId } };
+                                              setAudienceFunnelPicks(newPicks);
+                                              setExpandedStepFunnel(null);
+                                              // Desktop: auto-scroll to next unpicked strong-fit mode
+                                              const isDesktop = window.innerWidth > 768;
+                                              if (isDesktop) {
+                                                const nextMode = AUDIENCE_MODES.find(m => {
+                                                  if (newPicks[m.id]) return false;
+                                                  const f = getAudienceFit(productType, m.id, budget);
+                                                  return f?.score === "strong";
+                                                });
+                                                if (nextMode) {
+                                                  setAudience(nextMode.id);
+                                                  setExpandedAudience(nextMode.id);
+                                                  setTimeout(() => document.getElementById(`audience-${nextMode.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 350);
+                                                } else {
+                                                  setAudience(null);
+                                                }
+                                              } else {
+                                                setAudience(null);
+                                              }
+                                            }
+                                          }}
+                                          style={{
+                                            width: 20, height: 20, borderRadius: "50%", flexShrink: 0,
+                                            border: `2px solid ${isSelected ? mode.hex : "#334155"}`,
+                                            background: isSelected ? mode.hex : "transparent",
+                                            display: "flex", alignItems: "center", justifyContent: "center",
+                                            fontSize: 12, color: "#080c14", cursor: "pointer"
+                                          }}
+                                        >{isSelected ? "✓" : ""}</div>
 
                                         <span style={{ fontSize: 16 }}>{funnel.icon}</span>
                                         <div style={{ flex: 1, minWidth: 0 }}>
@@ -3567,7 +3616,7 @@ export default function MarketingStrategyFramework() {
                                         </div>
 
                                         {/* Channel + meta — hidden on mobile */}
-                                        <div className="funnel-pick-meta" style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4, flexShrink: 0 }}>
+                                        <div className="funnel-pick-meta" style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
                                           {ch && (
                                             <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, padding: "1px 6px", background: `${ch.hex}10`, border: `1px solid ${ch.hex}20`, borderRadius: 3, color: ch.hex, display: "flex", alignItems: "center", gap: 3 }}>
                                               <span style={{ fontSize: 10 }}>{ch.icon}</span> {ch.label}
@@ -3576,9 +3625,118 @@ export default function MarketingStrategyFramework() {
                                           <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#475569" }}>
                                             {funnel.complexity} · {funnel.time_to_build}
                                           </span>
+                                          <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: isFunnelExpanded ? funnel.hex : "#94a3b8", flexShrink: 0 }}>
+                                            {isFunnelExpanded ? "▲" : "▼"}
+                                          </span>
                                         </div>
                                       </div>
-                                    </button>
+
+                                      {/* Desktop expanded funnel detail panel */}
+                                      {isFunnelExpanded && (
+                                        <div className="funnel-pick-detail fade-in" style={{ padding: "0 14px 14px", borderTop: `1px solid ${funnel.hex}18` }}>
+                                          {/* Best for + origin */}
+                                          <div style={{ display: "flex", gap: 8, marginTop: 12, marginBottom: 10, flexWrap: "wrap" }}>
+                                            <div style={{ flex: 1, minWidth: 200, background: `${funnel.hex}06`, borderRadius: 7, padding: "10px 12px", border: `1px solid ${funnel.hex}18` }}>
+                                              <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: funnel.hex, letterSpacing: 1, marginBottom: 4 }}>BEST FOR</div>
+                                              <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{funnel.best_for}</div>
+                                            </div>
+                                            {funnel.origin && (
+                                              <div style={{ flex: 1, minWidth: 200, background: "rgba(255,255,255,0.02)", borderRadius: 7, padding: "10px 12px", border: "1px solid rgba(255,255,255,0.05)" }}>
+                                                <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#94a3b8", letterSpacing: 1, marginBottom: 4 }}>ORIGIN</div>
+                                                <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#7a9bbf", lineHeight: 1.6 }}>{funnel.origin}</div>
+                                              </div>
+                                            )}
+                                          </div>
+                                          {/* Stage flow */}
+                                          <div style={{ display: "flex", alignItems: "center", gap: 5, margin: "8px 0", flexWrap: "wrap" }}>
+                                            {funnel.stages.map((s, i) => (
+                                              <div key={i} style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                                                <span style={{ fontFamily: "var(--font-mono)", fontSize: 11, padding: "3px 8px", background: `${s.color}12`, border: `1px solid ${s.color}28`, borderRadius: 5, color: s.color, whiteSpace: "nowrap" }}>
+                                                  {s.icon} {s.label}
+                                                </span>
+                                                {i < funnel.stages.length - 1 && <span style={{ color: "#7a9bbf", fontSize: 14 }}>→</span>}
+                                              </div>
+                                            ))}
+                                          </div>
+                                          {/* Stage breakdown */}
+                                          <div style={{ display: "grid", gap: 6, marginBottom: 12 }}>
+                                            {funnel.stages.map((s, i) => (
+                                              <div key={i} style={{ display: "grid", gridTemplateColumns: "24px 1fr auto", gap: 10, alignItems: "start", background: "#040810", borderRadius: 7, padding: "10px 12px", border: `1px solid ${s.color}18` }}>
+                                                <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8" }}>{i + 1}.</div>
+                                                <div>
+                                                  <div style={{ fontFamily: "var(--font-display)", fontSize: 14, color: s.color, letterSpacing: 0.5, marginBottom: 3 }}>{s.icon} {s.label}</div>
+                                                  <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{s.desc}</div>
+                                                </div>
+                                                <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#64748b", textAlign: "right" }}>
+                                                  {s.cr && <div>{s.cr}</div>}
+                                                </div>
+                                              </div>
+                                            ))}
+                                          </div>
+                                          {/* Critical rule + implementation */}
+                                          <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
+                                            <div style={{ background: "rgba(248,113,113,0.05)", borderRadius: 7, padding: "10px 12px", border: "1px solid rgba(248,113,113,0.12)" }}>
+                                              <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#f87171", letterSpacing: 1, marginBottom: 4 }}>CRITICAL RULE</div>
+                                              <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{funnel.critical_rule}</div>
+                                            </div>
+                                            {funnel.bayside_implementation && (
+                                              <div style={{ background: `${funnel.hex}06`, borderRadius: 7, padding: "10px 12px", border: `1px solid ${funnel.hex}18` }}>
+                                                <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: funnel.hex, letterSpacing: 1, marginBottom: 4 }}>IMPLEMENTATION</div>
+                                                <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{funnel.bayside_implementation}</div>
+                                              </div>
+                                            )}
+                                          </div>
+                                          {/* When to use / don't use */}
+                                          <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
+                                            <div style={{ background: "rgba(52,211,153,0.04)", borderRadius: 7, padding: "10px 12px", border: "1px solid rgba(52,211,153,0.1)" }}>
+                                              <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#34d399", letterSpacing: 1, marginBottom: 4 }}>USE WHEN</div>
+                                              <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{funnel.when_to_use}</div>
+                                            </div>
+                                            <div style={{ background: "rgba(248,113,113,0.03)", borderRadius: 7, padding: "10px 12px", border: "1px solid rgba(248,113,113,0.08)" }}>
+                                              <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#f87171", letterSpacing: 1, marginBottom: 4 }}>DON'T USE WHEN</div>
+                                              <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{funnel.when_not_to_use}</div>
+                                            </div>
+                                          </div>
+                                          {/* Build info */}
+                                          <div style={{ display: "flex", gap: 12, marginBottom: 10, fontFamily: "var(--font-mono)", fontSize: 11, color: "#64748b" }}>
+                                            <span>{funnel.time_to_build}</span>
+                                            <span>{funnel.min_budget}</span>
+                                            <span>Complexity: {funnel.complexity}</span>
+                                          </div>
+                                          {/* Select this funnel button */}
+                                          <button
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              const newPicks = { ...audienceFunnelPicks, [mode.id]: { funnelId: funnel.id, channelId } };
+                                              setAudienceFunnelPicks(newPicks);
+                                              setExpandedStepFunnel(null);
+                                              const nextMode = AUDIENCE_MODES.find(m => {
+                                                if (newPicks[m.id]) return false;
+                                                const f = getAudienceFit(productType, m.id, budget);
+                                                return f?.score === "strong";
+                                              });
+                                              if (nextMode) {
+                                                setAudience(nextMode.id);
+                                                setExpandedAudience(nextMode.id);
+                                                setTimeout(() => document.getElementById(`audience-${nextMode.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 350);
+                                              } else {
+                                                setAudience(null);
+                                              }
+                                            }}
+                                            style={{
+                                              width: "100%", fontFamily: "var(--font-mono)", fontSize: 13, color: "#080c14",
+                                              background: `linear-gradient(135deg, ${mode.hex}, ${funnel.hex})`,
+                                              border: "none", borderRadius: 8, padding: "12px 20px", cursor: "pointer",
+                                              letterSpacing: 2, fontWeight: "bold",
+                                              boxShadow: `0 4px 16px ${mode.hex}30`,
+                                              transition: "all 0.2s"
+                                            }}
+                                          >
+                                            {isSelected ? "✓ SELECTED" : `SELECT ${funnel.name} →`}
+                                          </button>
+                                        </div>
+                                      )}
+                                    </div>
                                   );
                                 })}
                               </div>

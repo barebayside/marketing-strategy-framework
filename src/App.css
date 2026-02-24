@@ -238,8 +238,13 @@
     display: none !important;
   }
 
-  /* Step 04: hide funnel picker right-side meta (complexity/time) */
+  /* Step 04: hide funnel picker right-side meta (complexity/time/expand arrow) */
   .funnel-pick-meta {
+    display: none !important;
+  }
+
+  /* Step 04: hide expanded funnel detail panel on mobile */
+  .funnel-pick-detail {
     display: none !important;
   }
 
