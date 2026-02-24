@@ -2045,7 +2045,7 @@ function FunnelFlowCard({ funnel, isPrimary, isExpanded, onToggle, relevance, re
           </div>
 
           {/* Two-col: Critical Rule + Bare Bayside Implementation */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 14 }}>
+          <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 14 }}>
             <div style={{ background: "rgba(248,113,113,0.05)", borderRadius: 8, padding: "14px 16px", border: "1px solid rgba(248,113,113,0.15)" }}>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#f87171", letterSpacing: 2, marginBottom: 8 }}>⚠ CRITICAL RULE</div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#64748b", lineHeight: 1.8 }}>{funnel.critical_rule}</div>
@@ -2057,7 +2057,7 @@ function FunnelFlowCard({ funnel, isPrimary, isExpanded, onToggle, relevance, re
           </div>
 
           {/* When to use / not use */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 14 }}>
+          <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 14 }}>
             <div style={{ background: "rgba(52,211,153,0.05)", borderRadius: 8, padding: "12px 16px", border: "1px solid rgba(52,211,153,0.12)" }}>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#34d399", letterSpacing: 2, marginBottom: 6 }}>✓ USE THIS WHEN</div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#94a3b8", lineHeight: 1.7 }}>{funnel.when_to_use}</div>
@@ -2167,7 +2167,7 @@ function FunnelFlowCard({ funnel, isPrimary, isExpanded, onToggle, relevance, re
               {funnel.partner_types_by_product && (
                 <div style={{ marginTop: 14 }}>
                   <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: funnel.hex, letterSpacing: 2, marginBottom: 8 }}>IDEAL PARTNER TYPES BY PRODUCT CATEGORY</div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+                  <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
                     {Object.entries(funnel.partner_types_by_product).map(([cat, partners]) => (
                       <div key={cat} style={{ background: "rgba(255,255,255,0.015)", borderRadius: 7, padding: "10px 12px", border: "1px solid rgba(255,255,255,0.04)" }}>
                         <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: funnel.hex, marginBottom: 5, letterSpacing: 1, textTransform: "uppercase" }}>{cat.replace(/_/g, " ")}</div>
@@ -2306,7 +2306,7 @@ function FunnelSelectTile({ funnel, relevance, isSelected, onToggle, disabled, i
             ))}
           </div>
           {/* Critical rule + implementation */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
+          <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
             <div style={{ background: "rgba(248,113,113,0.05)", borderRadius: 7, padding: "10px 12px", border: "1px solid rgba(248,113,113,0.12)" }}>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#f87171", letterSpacing: 1, marginBottom: 4 }}>⚠ CRITICAL RULE</div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{funnel.critical_rule}</div>
@@ -2318,7 +2318,7 @@ function FunnelSelectTile({ funnel, relevance, isSelected, onToggle, disabled, i
               </div>
             )}
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+          <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
             <div style={{ background: "rgba(52,211,153,0.04)", borderRadius: 7, padding: "10px 12px", border: "1px solid rgba(52,211,153,0.1)" }}>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#34d399", letterSpacing: 1, marginBottom: 4 }}>✓ USE WHEN</div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{funnel.when_to_use}</div>
@@ -2440,7 +2440,7 @@ function ChannelCard({ ch, isActive, onToggle }) {
           </div>
 
           {/* Stats row */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 16 }}>
+          <div className="rg-stats-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 16 }}>
             {[
               { label: "OPEN / VIEW RATE", value: ch.open_rate },
               { label: "CTR / REPLY RATE", value: ch.ctr },
@@ -2500,7 +2500,7 @@ function ChannelCard({ ch, isActive, onToggle }) {
           )}
 
           {/* Frequency + Metrics row */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 14 }}>
+          <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 14 }}>
             <div style={{ background: "#040810", borderRadius: 8, padding: "12px 14px", border: "1px solid rgba(255,255,255,0.05)" }}>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#f59e0b", letterSpacing: 2, marginBottom: 6 }}>FREQUENCY GUIDE</div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.7 }}>{ch.frequency}</div>
@@ -2665,7 +2665,7 @@ function ChannelBreakdown({ audienceModeId, activeChannelForFunnels, setActiveCh
                   <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#94a3b8", lineHeight: 1.8, marginBottom: 16, borderLeft: `3px solid ${ch.hex}40`, paddingLeft: 14 }}>
                     {ch.conversation_truth}
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 16 }}>
+                  <div className="rg-stats-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, marginBottom: 16 }}>
                     {[
                       { label: "OPEN / VIEW RATE", value: ch.open_rate },
                       { label: "CTR / REPLY RATE", value: ch.ctr },
@@ -2687,7 +2687,7 @@ function ChannelBreakdown({ audienceModeId, activeChannelForFunnels, setActiveCh
                       ))}
                     </div>
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                  <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
                     <div style={{ background: "#040810", borderRadius: 8, padding: "12px 14px", border: "1px solid rgba(255,255,255,0.05)" }}>
                       <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#f59e0b", letterSpacing: 2, marginBottom: 6 }}>FREQUENCY GUIDE</div>
                       <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.7 }}>{ch.frequency}</div>
@@ -2834,7 +2834,7 @@ function FunnelActionPlanSummary({ selectedChannelFunnels, audienceModeId }) {
                             </div>
                           ))}
                         </div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 8 }}>
+                        <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 8 }}>
                           <div style={{ background: "rgba(248,113,113,0.05)", borderRadius: 7, padding: "10px 12px", border: "1px solid rgba(248,113,113,0.12)" }}>
                             <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#f87171", letterSpacing: 1, marginBottom: 4 }}>⚠ CRITICAL RULE</div>
                             <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{funnel.critical_rule}</div>
@@ -2846,7 +2846,7 @@ function FunnelActionPlanSummary({ selectedChannelFunnels, audienceModeId }) {
                             </div>
                           )}
                         </div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                        <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                           <div style={{ background: "rgba(52,211,153,0.04)", borderRadius: 7, padding: "10px 12px", border: "1px solid rgba(52,211,153,0.1)" }}>
                             <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#34d399", letterSpacing: 1, marginBottom: 4 }}>✓ USE WHEN</div>
                             <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", lineHeight: 1.6 }}>{funnel.when_to_use}</div>
@@ -2896,7 +2896,7 @@ function UTMBlock({ utm }) {
   return (
     <div style={{ background: "#040810", borderRadius: 8, padding: "14px 16px", border: "1px solid rgba(56,189,248,0.12)", marginTop: 12 }}>
       <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#94a3b8", letterSpacing: 2, marginBottom: 10 }}>GENERATED UTM URL</div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4px 20px", marginBottom: 10 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4px 20px", marginBottom: 10 }}>
         {Object.entries(utm).map(([k, v]) => (
           <div key={k} style={{ fontFamily: "var(--font-mono)", fontSize: 15 }}>
             <span style={{ color: "#94a3b8" }}>utm_{k}=</span>
@@ -2930,7 +2930,7 @@ function DiagnosticPanel({ condition }) {
   return (
     <div style={{ background: "#040810", border: `1px solid ${condition.hex}25`, borderRadius: 12, padding: 20, marginTop: 8 }} className="fade-in">
       <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: condition.hex, letterSpacing: 2, marginBottom: 14 }}>{condition.signals.title.toUpperCase()}</div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 14 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 14 }}>
         <div>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#34d399", letterSpacing: 2, marginBottom: 8 }}>✓ SIGNALS THIS IS YOUR MARKET</div>
           {condition.signals.positive.map((s, i) => (
@@ -2967,7 +2967,7 @@ function ConstraintDetail({ c }) {
           </div>
         ))}
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         <div style={{ background: "rgba(248,113,113,0.05)", borderRadius: 8, padding: "12px 14px", border: "1px solid rgba(248,113,113,0.12)" }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#f87171", letterSpacing: 2, marginBottom: 6 }}>✗ THE WRONG FIX (costly mistake)</div>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#94a3b8", lineHeight: 1.7 }}>{c.wrong_fix}</div>
@@ -2997,7 +2997,7 @@ function AudienceDetail({ mode }) {
           </div>
         ))}
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
         <div style={{ background: `${mode.hex}0a`, borderRadius: 8, padding: "12px 14px", border: `1px solid ${mode.hex}1a` }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: mode.hex, letterSpacing: 2, marginBottom: 6 }}>CREATIVE / COPY FORMULA</div>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#64748b", lineHeight: 1.7 }}>{mode.creative_formula}</div>
@@ -3007,7 +3007,7 @@ function AudienceDetail({ mode }) {
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#94a3b8", lineHeight: 1.7 }}>{mode.copy_example}</div>
         </div>
       </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+      <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
         <div style={{ background: "rgba(56,189,248,0.04)", borderRadius: 8, padding: "10px 14px", border: "1px solid rgba(56,189,248,0.1)" }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#38bdf8", letterSpacing: 2, marginBottom: 4 }}>ZOHO UTM TAGGING</div>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#94a3b8", lineHeight: 1.6 }}>{mode.zoho_tag}</div>
@@ -3024,7 +3024,7 @@ function AudienceDetail({ mode }) {
 // ── BRANDED FOOTER ──────────────────────────────────────────────────────────
 const BrandedFooter = () => (
   <div style={{ textAlign: "center", paddingTop: 32, paddingBottom: 16, marginTop: 32, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-    <img src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 120, objectFit: "contain", marginBottom: 12 }} />
+    <img className="footer-logo" src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 120, objectFit: "contain", marginBottom: 12 }} />
     <div style={{ fontFamily: "var(--font-display)", fontSize: 24, color: "#e2e8f0", letterSpacing: 2, marginBottom: 8 }}>BARE BAYSIDE LABS</div>
     <a href="https://barebaysidelabs.com" target="_blank" rel="noopener noreferrer" style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#38bdf8", textDecoration: "none", letterSpacing: 1 }}>
       barebaysidelabs.com
@@ -3106,9 +3106,9 @@ export default function MarketingStrategyFramework() {
       <style>{styles}</style>
 
       {/* Header */}
-      <div style={{ background: "linear-gradient(180deg,#0d1525 0%,#080c14 100%)", borderBottom: "1px solid var(--border)", padding: "22px 28px" }}>
+      <div className="rp-header" style={{ background: "linear-gradient(180deg,#0d1525 0%,#080c14 100%)", borderBottom: "1px solid var(--border)", padding: "22px 28px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 10 }}>
+          <div className="header-inner" style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 10 }}>
             <img src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 130, objectFit: "contain" }} />
             <div>
               <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px,5vw,62px)", color: "#e2e8f0", letterSpacing: 3, lineHeight: 1 }}>BARE BAYSIDE LABS</div>
@@ -3125,7 +3125,7 @@ export default function MarketingStrategyFramework() {
       </div>
 
       {/* Tabs */}
-      <div style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)", overflowX: "auto" }}>
+      <div className="responsive-tabs" style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)", overflowX: "auto" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex" }}>
           {[["your_plan","📋 YOUR PLAN"],["framework","STRATEGY SELECTOR"],["naming","NAMING CONVENTION"],["utm_map","UTM MAP"],["glossary","GLOSSARY"]].map(([t, label]) => {
             const isYourPlan = t === "your_plan";
@@ -3152,7 +3152,7 @@ export default function MarketingStrategyFramework() {
           <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", letterSpacing: 2 }}>ZOOM</span>
           <button onClick={() => setZoom(z => Math.max(ZOOM_MIN, parseFloat((z - ZOOM_STEP).toFixed(1))))}
             style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 6, color: "#94a3b8", fontFamily: "var(--font-mono)", fontSize: 18, width: 32, height: 32, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", lineHeight: 1 }}>−</button>
-          <div style={{ display: "flex", gap: 4 }}>
+          <div className="zoom-presets" style={{ display: "flex", gap: 4 }}>
             {[0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4].map(z => (
               <button key={z} onClick={() => setZoom(z)} style={{
                 background: zoom === z ? "rgba(56,189,248,0.15)" : "var(--surface)",
@@ -3170,12 +3170,12 @@ export default function MarketingStrategyFramework() {
         </div>
       </div>
 
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 18px" }}>
+      <div className="rp-section" style={{ maxWidth: 1100, margin: "0 auto", padding: "24px 18px" }}>
         <div style={{ transform: `scale(${zoom})`, transformOrigin: "top left", width: `${(1/zoom)*100}%` }}>
         {activeTab === "framework" && (
           <div>
             {/* Framework Overview */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 10, marginBottom: 26 }}>
+            <div className="rg-5" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 10, marginBottom: 26 }}>
               {[
                 { label: "STEP 00", title: "PRODUCT TYPE", items: ["High-ticket service", "Mid-ticket service", "Digital product", "Ecommerce", "SaaS / App", "Local service", "Community / Membership"], color: "#fb923c" },
                 { label: "STEP 01", title: "MARKET TEMPERATURE", items: ["Cold → No awareness", "Warm → Know problem, not you", "Hot → Raised their hand"], color: "#38bdf8" },
@@ -3203,7 +3203,7 @@ export default function MarketingStrategyFramework() {
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
                 Your product or service type is the first filter. It determines which audience modes are a natural fit, which have friction, and which are incompatible with your budget. Select the closest match — this grades every subsequent step.
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 10 }}>
+              <div className="rg-cards" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 10 }}>
                 {PRODUCT_TYPES.map(pt => (
                   <button key={pt.id} onClick={() => { setProductType(pt.id); setMarket(null); setConstraint(null); setBudget(null); setAudience(null); setSelectedChannelFunnels({}); setActiveChannelForFunnels(null); setAudienceFunnelPicks({}); setTimeout(() => document.getElementById('step-01')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150); }} style={{
                     background: productType === pt.id ? `${pt.hex}10` : "var(--surface)",
@@ -3251,7 +3251,7 @@ export default function MarketingStrategyFramework() {
                       transition: "all 0.2s", position: "relative", overflow: "hidden"
                     }}>
                       {market===m.id && <div style={{ position:"absolute", top:0, left:0, bottom:0, width:3, background:m.hex }} />}
-                      <div style={{ display:"grid", gridTemplateColumns:"auto 1fr auto", gap:14, alignItems:"center" }}>
+                      <div className="rg-detail-3" style={{ display:"grid", gridTemplateColumns:"auto 1fr auto", gap:14, alignItems:"center" }}>
                         <div style={{ fontSize:32 }}>{m.icon}</div>
                         <div>
                           <div style={{ fontFamily:"var(--font-display)", fontSize:27, color:market===m.id?m.hex:"#e2e8f0", letterSpacing:1 }}>{m.label}</div>
@@ -3289,7 +3289,7 @@ export default function MarketingStrategyFramework() {
                         transition: "all 0.2s", position: "relative"
                       }}>
                         {constraint===c.id && <div style={{ position:"absolute", top:0, left:0, bottom:0, width:3, background:c.hex }} />}
-                        <div style={{ display:"grid", gridTemplateColumns:"auto 1fr auto", gap:14, alignItems:"flex-start" }}>
+                        <div className="rg-detail-3" style={{ display:"grid", gridTemplateColumns:"auto 1fr auto", gap:14, alignItems:"flex-start" }}>
                           <div style={{ fontSize:32, paddingTop:2 }}>{c.icon}</div>
                           <div>
                             <div style={{ fontFamily:"var(--font-display)", fontSize:27, color:constraint===c.id?c.hex:"#e2e8f0", letterSpacing:1 }}>{c.label}</div>
@@ -3321,7 +3321,7 @@ export default function MarketingStrategyFramework() {
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
                   Budget determines your platform mix and scaling approach, not your strategic direction. Never commit more than you can sustain for a minimum of 90 days. Campaigns need time to accumulate data before optimisation is possible.
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
+                <div className="rg-budget" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
                   {BUDGET_LEVELS.map(b => (
                     <button key={b.id} onClick={() => { setBudget(b.id); setTimeout(() => document.getElementById('step-04')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150); }} style={{
                       background: budget===b.id ? "rgba(52,211,153,0.09)" : "var(--surface)",
@@ -3744,7 +3744,7 @@ export default function MarketingStrategyFramework() {
                 ))}
               </div>
             </div>
-            <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12 }}>
+            <div className="rg-2" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12 }}>
               <div style={{ background:"var(--surface)", borderRadius:12, padding:18, border:"1px solid rgba(248,113,113,0.18)" }}>
                 <div style={{ fontFamily:"var(--font-mono)", fontSize:18, color:"#f87171", letterSpacing:2, marginBottom:12 }}>WHEN TO INCREMENT VERSION (1.0 → 1.1)</div>
                 {["CPL increases 30%+ over your baseline","CTR drops below 1% on cold audiences","90 days active on the same creative","500+ leads generated — proven, now refresh","Significant offer or price change"].map((r,i) => (
@@ -3797,7 +3797,7 @@ export default function MarketingStrategyFramework() {
             {/* PERFORMANCE METRICS */}
             <div style={{ marginBottom:28 }}>
               <div style={{ fontFamily:"var(--font-display)", fontSize:24, letterSpacing:2, color:"#f59e0b", marginBottom:16 }}>PERFORMANCE METRICS</div>
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
+              <div className="rg-glossary" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
                 {[
                   { term:"CPL", full:"Cost Per Lead", def:"How much you pay in ad spend to acquire one new lead (opt-in, form fill, or enquiry). Calculated as: Total Ad Spend ÷ Number of Leads. A rising CPL signals creative fatigue or audience exhaustion." },
                   { term:"CPA", full:"Cost Per Acquisition", def:"How much you pay to acquire one paying customer. Includes all spend across the funnel. Calculated as: Total Ad Spend ÷ Number of Sales. The ultimate paid ads health metric." },
@@ -3847,7 +3847,7 @@ export default function MarketingStrategyFramework() {
             {/* CAMPAIGN STRUCTURE TERMS */}
             <div style={{ marginBottom:28 }}>
               <div style={{ fontFamily:"var(--font-display)", fontSize:24, letterSpacing:2, color:"#a78bfa", marginBottom:16 }}>CAMPAIGN STRUCTURE TERMS</div>
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
+              <div className="rg-glossary" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
                 {[
                   { term:"VSL", full:"Video Sales Letter", def:"A video that performs the job of a traditional long-form sales letter. Typically 10–20 minutes. Lives on Page 2 of the Surfboard Funnel. Structure: identify the problem, agitate the pain, introduce the solution, prove it works, make the offer, overcome objections, call to action." },
                   { term:"UGC", full:"User Generated Content", def:"Content filmed and presented in the style of an organic user post — typically a talking head on a phone, casual setting, authentic feel. Not professionally produced. UGC-style ads consistently outperform polished brand videos on Meta and TikTok because they look native to the feed." },
@@ -3872,7 +3872,7 @@ export default function MarketingStrategyFramework() {
             {/* AUDIENCE TERMS */}
             <div style={{ marginBottom:10 }}>
               <div style={{ fontFamily:"var(--font-display)", fontSize:24, letterSpacing:2, color:"#f472b6", marginBottom:16 }}>AUDIENCE & PLATFORM TERMS</div>
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
+              <div className="rg-glossary" style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10 }}>
                 {[
                   { term:"Lookalike Audience", full:"LAL / LLA", def:"A targeting option on Meta and TikTok that finds new people who share characteristics with an existing audience (your email list, your pixel visitors, your past customers). Used for cold prospecting — you're finding cold people who statistically resemble your warm or hot audiences." },
                   { term:"Custom Audience", full:"Retargeting Audience", def:"An audience built from people who have already interacted with you — website visitors, video viewers, email list uploads, past customers. Used for warm and hot market campaigns. More expensive per impression than cold audiences but converts at significantly higher rates." },
@@ -3945,7 +3945,7 @@ export default function MarketingStrategyFramework() {
               </table>
             </div>
             <div style={{ fontFamily:"var(--font-display)", fontSize:30, letterSpacing:2, marginBottom:12 }}>CROSS-PLATFORM <span style={{ color:"#38bdf8" }}>MATRIX</span></div>
-            <div style={{ background:"var(--surface)", borderRadius:14, border:"1px solid var(--border)", overflow:"auto" }}>
+            <div className="table-scroll" style={{ background:"var(--surface)", borderRadius:14, border:"1px solid var(--border)", overflow:"auto" }}>
               <table style={{ width:"100%", borderCollapse:"collapse", minWidth:520 }}>
                 <thead>
                   <tr style={{ background:"rgba(99,179,237,0.03)" }}>
@@ -3999,7 +3999,7 @@ export default function MarketingStrategyFramework() {
           if (!hasMinimum) {
             return (
               <div style={{ textAlign: "center", padding: "80px 20px" }}>
-                <img src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 120, objectFit: "contain", marginBottom: 20, opacity: 0.9 }} />
+                <img className="empty-state-logo" src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 120, objectFit: "contain", marginBottom: 20, opacity: 0.9 }} />
                 <div style={{ fontFamily: "var(--font-display)", fontSize: 30, color: "#e2e8f0", letterSpacing: 2, marginBottom: 8 }}>YOUR PLAN</div>
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: 16, color: "#94a3b8", lineHeight: 1.8, maxWidth: 500, margin: "0 auto" }}>
                   Complete all steps in the <span style={{ color: "#38bdf8", cursor: "pointer" }} onClick={() => setActiveTab("framework")}>Strategy Selector</span> to generate your full marketing plan.
@@ -4126,7 +4126,7 @@ export default function MarketingStrategyFramework() {
                   <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#94a3b8", letterSpacing: 3, marginBottom: 18, paddingBottom: 12, borderBottom: "1px solid rgba(255,255,255,0.12)" }}>
                     02 — CONSTRAINT DIAGNOSIS
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                     <div style={{ background: `${cn.hex}06`, borderRadius: 10, padding: "16px 18px", border: `1px solid ${cn.hex}20` }}>
                       <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: cn.hex, letterSpacing: 2, marginBottom: 10 }}>DIAGNOSTIC SIGNALS</div>
                       {cn.diagnostic.map((d, i) => (
@@ -4169,7 +4169,7 @@ export default function MarketingStrategyFramework() {
                       <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: strategy.color }}>CTA → {strategy.cta}</div>
                     </div>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 14 }}>
+                    <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 14 }}>
                       <div style={{ background: "rgba(0,0,0,0.2)", borderRadius: 8, padding: "12px 14px" }}>
                         <div style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#7a9bbf", letterSpacing: 2, marginBottom: 6 }}>CAMPAIGN CODE</div>
                         <NamingBadge campaign={strategy.campaign} stage={strategy.stage} />
@@ -4184,7 +4184,7 @@ export default function MarketingStrategyFramework() {
                       </div>
                     </div>
 
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 14 }}>
+                    <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 14 }}>
                       <div style={{ background: "rgba(167,139,250,0.04)", borderRadius: 8, padding: "12px 14px", border: "1px solid rgba(167,139,250,0.1)" }}>
                         <div style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#a78bfa", letterSpacing: 2, marginBottom: 4 }}>ZOHO MA JOURNEY</div>
                         <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#94a3b8" }}>{strategy.sequence}</div>
@@ -4342,7 +4342,7 @@ export default function MarketingStrategyFramework() {
                           </div>
 
                           {/* Critical rule + Bayside implementation */}
-                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
+                          <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
                             {funnel.critical_rule && (
                               <div style={{ background: "rgba(248,113,113,0.04)", borderRadius: 6, padding: "10px 14px", border: "1px solid rgba(248,113,113,0.12)" }}>
                                 <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#f87171", letterSpacing: 2, marginBottom: 3 }}>⚠ CRITICAL RULE</div>
@@ -4358,7 +4358,7 @@ export default function MarketingStrategyFramework() {
                           </div>
 
                           {/* When to use / don't use */}
-                          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
+                          <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
                             {funnel.when_to_use && (
                               <div style={{ background: "rgba(52,211,153,0.04)", borderRadius: 6, padding: "10px 14px", border: "1px solid rgba(52,211,153,0.12)" }}>
                                 <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#34d399", letterSpacing: 2, marginBottom: 3 }}>✓ WHEN TO USE</div>
@@ -4525,7 +4525,7 @@ export default function MarketingStrategyFramework() {
                           <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: currentRung.color, marginBottom: 4 }}>YOU ARE HERE — {currentRung.rung} ({currentRung.price})</div>
                           <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: "#94a3b8", lineHeight: 1.7 }}>{currentRung.desc}</div>
                         </div>
-                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                        <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
                           {prevRung && prevRung !== currentRung && (
                             <div style={{ background: "rgba(0,0,0,0.2)", borderRadius: 8, padding: "10px 14px", border: "1px solid rgba(255,255,255,0.05)" }}>
                               <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: prevRung.color, letterSpacing: 2, marginBottom: 3 }}>↓ RUNG BELOW — {prevRung.rung}</div>
@@ -4575,7 +4575,7 @@ export default function MarketingStrategyFramework() {
                   border: "2px solid rgba(56,189,248,0.35)", borderRadius: 18, padding: "16px 32px 40px", textAlign: "center",
                   boxShadow: "0 0 40px rgba(56,189,248,0.08), 0 0 80px rgba(167,139,250,0.04), inset 0 1px 0 rgba(255,255,255,0.06)"
                 }}>
-                  <img src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 220, objectFit: "contain", marginBottom: -4, opacity: 0.95 }} />
+                  <img className="email-cta-logo" src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 220, objectFit: "contain", marginBottom: -4, opacity: 0.95 }} />
                   <div style={{ fontFamily: "var(--font-display)", fontSize: 30, color: "#e2e8f0", letterSpacing: 2, marginBottom: 10 }}>
                     Get This Plan Emailed To You
                   </div>
@@ -4655,7 +4655,7 @@ export default function MarketingStrategyFramework() {
                   </div>
                 </div>
                 {/* Three benefit cards — bonus items get gold premium feel */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr auto 1fr", gap: 0, alignItems: "stretch" }}>
+                <div className="rg-benefits" style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr auto 1fr", gap: 0, alignItems: "stretch" }}>
                   {[
                     { icon: "📋", title: "YOUR FULL PLAN", desc: "Complete campaign blueprint with all selections, strategies, and engagement paths — ready to action", color: "#38bdf8", premium: false },
                     { icon: "⚙️", title: "AUTOMATION TEMPLATES", subtitle: "Powered by Zoho", desc: "Pre-built CRM pipelines, Marketing Automation journeys, and email sequences — import directly into your Zoho account", color: "#f5c542", premium: true },
@@ -4688,7 +4688,7 @@ export default function MarketingStrategyFramework() {
                         <div style={{ fontFamily: "var(--font-mono)", fontSize: item.premium ? 14 : 13, color: item.premium ? "#e2e8f0" : "#c4d5e8", lineHeight: 1.8 }}>{item.desc}</div>
                       </div>
                       {i < 2 && (
-                        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "0 8px" }}>
+                        <div className="benefit-separator" style={{ display: "flex", alignItems: "center", justifyContent: "center", padding: "0 8px" }}>
                           <div style={{
                             width: 34, height: 34, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
                             background: "linear-gradient(135deg, rgba(245,197,66,0.12), rgba(245,158,11,0.08))",

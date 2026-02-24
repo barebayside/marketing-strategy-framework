@@ -1,42 +1,131 @@
+/* ═══════════════════════════════════════════════════ */
+/* RESPONSIVE OVERRIDES FOR MarketingStrategyFramework */
+/* ═══════════════════════════════════════════════════ */
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+/* ─── MOBILE BREAKPOINT (≤768px) ─── */
+@media (max-width: 768px) {
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+  /* 5-column framework overview → 1 column */
+  .rg-5 {
+    grid-template-columns: 1fr !important;
   }
-  to {
-    transform: rotate(360deg);
+
+  /* Product type cards → 1 column */
+  .rg-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Tab navigation → smooth horizontal scroll */
+  .responsive-tabs {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .responsive-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 3-column benefit cards → stacked, hide "+" separators */
+  .rg-benefits {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .benefit-separator {
+    display: none !important;
+  }
+
+  /* Budget grid → 1 column */
+  .rg-budget {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* 3-column stats grids → 1 column */
+  .rg-stats-3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Zoom controls → hide preset buttons, keep +/- */
+  .zoom-presets {
+    display: none !important;
+  }
+
+  /* UTM table → allow scroll, remove min-width */
+  .table-scroll table {
+    min-width: 0 !important;
+    font-size: 11px !important;
+  }
+
+  /* Header → stack logo above text */
+  .header-inner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+  .header-inner img {
+    height: 80px !important;
+  }
+
+  /* Header bar padding */
+  .rp-header {
+    padding: 16px 14px !important;
+  }
+
+  /* Main content section padding */
+  .rp-section {
+    padding: 16px 12px !important;
+  }
+
+  /* 2-column grids → stacked */
+  .rg-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Market/Constraint/Audience 3-column detail inner grids */
+  .rg-detail-3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Glossary 2-column grid */
+  .rg-glossary {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Section 09 email CTA logo */
+  .email-cta-logo {
+    height: 140px !important;
+  }
+
+  /* Footer logo */
+  .footer-logo {
+    height: 80px !important;
+  }
+
+  /* Your Plan empty state logo */
+  .empty-state-logo {
+    height: 80px !important;
+  }
+
+  /* Funnel stage grid → simplify */
+  .rg-stage {
+    grid-template-columns: auto 1fr !important;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/* ─── SMALL MOBILE (≤480px) ─── */
+@media (max-width: 480px) {
+  .rp-header {
+    padding: 12px 10px !important;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  .rp-section {
+    padding: 12px 8px !important;
+  }
+  .header-inner img {
+    height: 64px !important;
+  }
 }

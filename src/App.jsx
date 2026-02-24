@@ -1,3 +1,4 @@
+import './App.css'
 import MarketingStrategyFramework from './MarketingStrategyFramework.jsx'
 
 function App() {
