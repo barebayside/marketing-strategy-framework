@@ -3077,16 +3077,16 @@ export default function MarketingStrategyFramework() {
     } else {
       setMarket(id); setExpandedMarket(id);
       setConstraint(null); setBudget(null); setAudience(null); setSelectedChannelFunnels({}); setActiveChannelForFunnels(null); setAudienceFunnelPicks({});
-      setTimeout(() => document.getElementById('step-01')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+      setTimeout(() => document.getElementById('step-02')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
     }
   };
   const selectConstraint = (id) => {
     if (constraint === id) setExpandedConstraint(v => v === id ? null : id);
-    else { setConstraint(id); setExpandedConstraint(id); setTimeout(() => document.getElementById('step-02')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150); }
+    else { setConstraint(id); setExpandedConstraint(id); setTimeout(() => document.getElementById('step-03')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }
   };
   const selectAudience = (id) => {
     if (audience === id) setExpandedAudience(v => v === id ? null : id);
-    else { setAudience(id); setExpandedAudience(id); }
+    else { setAudience(id); setExpandedAudience(id); setTimeout(() => document.getElementById('step-04')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300); }
   };
 
   const handleToggleChannelFunnel = (channelId, funnelId) => {
@@ -3196,8 +3196,8 @@ export default function MarketingStrategyFramework() {
             </div>
 
             {/* STEP 0 — PRODUCT / SERVICE TYPE */}
-            <div id="step-00" style={{ marginBottom: 22 }}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
+            <div id="step-00" className="step-container" style={{ marginBottom: 22 }}>
+              <div className="step-header" style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
                 <span style={{ color: "#94a3b8" }}>STEP 00 — </span><span style={{ color: "#fb923c" }}>PRODUCT / SERVICE TYPE</span>
               </div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
@@ -3234,8 +3234,8 @@ export default function MarketingStrategyFramework() {
               </div>
             </div>
             {productType && (
-            <div id="step-01" style={{ marginBottom: 22 }} className="fade-in">
-              <div style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
+            <div id="step-01" style={{ marginBottom: 22 }} className="fade-in step-container">
+              <div className="step-header" style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
                 <span style={{ color: "#94a3b8" }}>STEP 01 — </span><span style={{ color: "#38bdf8" }}>MARKET TEMPERATURE</span>
               </div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
@@ -3272,8 +3272,8 @@ export default function MarketingStrategyFramework() {
 
             {/* STEP 2 */}
             {market && (
-              <div id="step-02" style={{ marginBottom: 22 }} className="fade-in">
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
+              <div id="step-02" style={{ marginBottom: 22 }} className="fade-in step-container">
+                <div className="step-header" style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
                   <span style={{ color: "#94a3b8" }}>STEP 02 — </span><span style={{ color: "#f59e0b" }}>YOUR CURRENT BOTTLENECK</span>
                 </div>
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
@@ -3314,8 +3314,8 @@ export default function MarketingStrategyFramework() {
 
             {/* STEP 3 */}
             {market && constraint && (
-              <div id="step-03" style={{ marginBottom: 22 }} className="fade-in">
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
+              <div id="step-03" style={{ marginBottom: 22 }} className="fade-in step-container">
+                <div className="step-header" style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
                   <span style={{ color: "#94a3b8" }}>STEP 03 — </span><span style={{ color: "#34d399" }}>AVAILABLE BUDGET</span>
                 </div>
                 <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#7a9bbf", marginBottom: 14, lineHeight: 1.6 }}>
@@ -3340,8 +3340,8 @@ export default function MarketingStrategyFramework() {
 
             {/* STEP 4 — AUDIENCE DISCOVERY MODE + FUNNEL PICKS */}
             {market && constraint && budget && (
-              <div id="step-04" style={{ marginBottom: 28 }} className="fade-in">
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
+              <div id="step-04" style={{ marginBottom: 28 }} className="fade-in step-container">
+                <div className="step-header" style={{ fontFamily: "var(--font-display)", fontSize: 22, letterSpacing: 2, marginBottom: 4 }}>
                   <span style={{ color: "#94a3b8" }}>STEP 04 — </span><span style={{ color: "#f472b6" }}>AUDIENCE DISCOVERY MODE</span>
                 </div>
                 {(() => {

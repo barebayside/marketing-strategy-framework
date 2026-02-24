@@ -115,6 +115,24 @@
   .rg-stage {
     grid-template-columns: auto 1fr !important;
   }
+
+  /* Step containers → more spacing between steps */
+  .step-container {
+    margin-bottom: 36px !important;
+    padding-top: 20px !important;
+    border-top: 2px solid rgba(255, 255, 255, 0.08) !important;
+  }
+  .step-container:first-child {
+    border-top: none !important;
+    padding-top: 0 !important;
+  }
+
+  /* Step headers → bigger and bolder on mobile */
+  .step-header {
+    font-size: 28px !important;
+    margin-bottom: 10px !important;
+    padding-bottom: 8px !important;
+  }
 }
 
 /* ─── SMALL MOBILE (≤480px) ─── */
