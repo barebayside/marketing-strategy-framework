@@ -3169,7 +3169,7 @@ export default function MarketingStrategyFramework() {
 
       {/* Tabs */}
       <div className="responsive-tabs" style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)", overflowX: "auto" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex" }}>
+        <div className="tab-inner" style={{ maxWidth: 1100, margin: "0 auto", display: "flex" }}>
           {[["your_plan","📋 YOUR PLAN"],["framework","STRATEGY SELECTOR"],["naming","NAMING CONVENTION"],["utm_map","UTM MAP"],["glossary","GLOSSARY"]].map(([t, label]) => {
             const isYourPlan = t === "your_plan";
             const hasStrategy = !!(market && constraint && budget);

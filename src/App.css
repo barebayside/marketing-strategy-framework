@@ -40,13 +40,19 @@
     grid-template-columns: 1fr !important;
   }
 
-  /* Tab navigation → smooth horizontal scroll */
+  /* Tab navigation → wrap instead of scroll */
   .responsive-tabs {
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    overflow-x: visible !important;
   }
-  .responsive-tabs::-webkit-scrollbar {
-    display: none;
+  .tab-inner {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+  .tab-inner button {
+    white-space: nowrap !important;
+    font-size: 12px !important;
+    padding: 9px 12px !important;
+    letter-spacing: 1px !important;
   }
 
   /* 3-column benefit cards → stacked, hide "+" separators */
