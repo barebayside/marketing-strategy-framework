@@ -4312,34 +4312,13 @@ export default function MarketingStrategyFramework() {
                       ║  • Zoho CRM Web Form: Setup → Web Forms → Embed              ║
                       ║  • Zoho MA: Lead Gen → Forms → Get Embed Code                ║
                       ╚═══════════════════════════════════════════════════════════════╝ */}
-                  <div id="zoho-form-embed" style={{ maxWidth: 500, margin: "0 auto" }}>
-                    {/* ── PLACEHOLDER FORM — Replace this entire <div> with your Zoho embed ── */}
-                    <div className="email-form-row" style={{ display: "flex", gap: 10 }}>
-                      <input
-                        type="email"
-                        placeholder="Enter your email address"
-                        style={{
-                          flex: 1, fontFamily: "var(--font-mono)", fontSize: 15, color: "#e2e8f0",
-                          background: "rgba(0,0,0,0.4)", border: "2px solid rgba(56,189,248,0.35)",
-                          borderRadius: 10, padding: "14px 18px", outline: "none", minWidth: 0,
-                        }}
-                      />
-                      <button
-                        style={{
-                          fontFamily: "var(--font-mono)", fontSize: 15, color: "#080c14",
-                          background: "linear-gradient(135deg, #38bdf8, #34d399)",
-                          border: "none", borderRadius: 10, padding: "14px 28px", cursor: "pointer",
-                          letterSpacing: 2, fontWeight: "bold", whiteSpace: "nowrap",
-                          boxShadow: "0 4px 20px rgba(56,189,248,0.3)",
-                        }}
-                      >
-                        SEND MY PLAN
-                      </button>
-                    </div>
-                    <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#8b9dc4", marginTop: 12, lineHeight: 1.6 }}>
-                      No spam. You'll receive your personalised campaign plan and Zoho implementation templates.
-                    </div>
-                    {/* ── END PLACEHOLDER — Your Zoho embed replaces everything above ── */}
+                  <div id="zoho-form-embed" style={{ maxWidth: 600, margin: "0 auto" }}>
+                    <iframe
+                      aria-label="Marketing Strategy Plan"
+                      frameBorder="0"
+                      style={{ height: 500, width: "100%", border: "none", borderRadius: 10 }}
+                      src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
+                    />
                   </div>
                 </div>
 
@@ -4970,32 +4949,13 @@ export default function MarketingStrategyFramework() {
                   <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#c4d5e8", lineHeight: 1.9, marginBottom: 24, maxWidth: 540, margin: "0 auto 24px" }}>
                     Receive your full campaign blueprint, funnel strategies, and Zoho implementation templates.
                   </div>
-                  <div style={{ maxWidth: 500, margin: "0 auto" }}>
-                    <div className="email-form-row" style={{ display: "flex", gap: 10 }}>
-                      <input
-                        type="email"
-                        placeholder="Enter your email address"
-                        style={{
-                          flex: 1, fontFamily: "var(--font-mono)", fontSize: 15, color: "#e2e8f0",
-                          background: "rgba(0,0,0,0.4)", border: "2px solid rgba(56,189,248,0.35)",
-                          borderRadius: 10, padding: "14px 18px", outline: "none", minWidth: 0,
-                        }}
-                      />
-                      <button
-                        style={{
-                          fontFamily: "var(--font-mono)", fontSize: 15, color: "#080c14",
-                          background: "linear-gradient(135deg, #38bdf8, #34d399)",
-                          border: "none", borderRadius: 10, padding: "14px 28px", cursor: "pointer",
-                          letterSpacing: 2, fontWeight: "bold", whiteSpace: "nowrap",
-                          boxShadow: "0 4px 20px rgba(56,189,248,0.3)",
-                        }}
-                      >
-                        SEND MY PLAN
-                      </button>
-                    </div>
-                    <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#8b9dc4", marginTop: 12, lineHeight: 1.6 }}>
-                      No spam. You'll receive your personalised campaign plan and Zoho implementation templates.
-                    </div>
+                  <div style={{ maxWidth: 600, margin: "0 auto" }}>
+                    <iframe
+                      aria-label="Marketing Strategy Plan"
+                      frameBorder="0"
+                      style={{ height: 500, width: "100%", border: "none", borderRadius: 10 }}
+                      src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
+                    />
                   </div>
                 </div>
               </div>
