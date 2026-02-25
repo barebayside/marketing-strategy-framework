@@ -620,7 +620,7 @@ const AUDIENCE_MODES = [
       { name: "CAPTIONS always on — 85% rule", detail: "85% of social video is watched with the sound off. If your entire message lives in the audio track, you have already lost 85% of your potential audience before a single word registers. Every video requires either burned-in captions or text overlays that carry the full message visually. Test your ad with the sound muted — if the message still lands, you're in good shape." },
     ],
     creative_formula: "Pattern Interrupt (0–3s) → Pain Recognition (3–10s) → Solution Tease (10–20s) → Single CTA (20–30s)",
-    copy_example: "\"Still manually entering leads into your CRM after every enquiry? [show frustrated person at desk] Here's what happens when Zoho does it for you automatically... [30-second demo] → Grab the free automation audit — link in bio\"",
+    copy_example: "\"Still manually doing [pain point] after every enquiry? [show frustrated person at desk] Here's what happens when {{service}} does it for you automatically... [30-second demo] → Grab the free audit — link in bio\"",
     zoho_tag: "utm_source: meta or tiktok | utm_medium: awareness | Audience type: broad interest, lookalike, or cold prospecting",
     fatigue: "HIGH — creative must be refreshed every 4–6 weeks. Monitor Meta Frequency score: if Frequency exceeds 3.0 on the same audience, creative fatigue is setting in and CTR will begin dropping.",
   },
@@ -631,15 +631,15 @@ const AUDIENCE_MODES = [
     utm_sources: ["google", "bing"],
     why_matters: "This audience typed something into a search bar. That single act is the most powerful buying signal that exists in digital marketing — they have a problem, they know they have it, and they are actively seeking a solution right now. You are not creating demand; you are capturing it at the exact moment it is expressed. The intent signal is explicit, real-time, and self-qualifying. There is no warmer traffic available through paid channels than someone who just searched for the exact thing you provide.",
     tactics: [
-      { name: "KEYWORD ALIGNMENT is the entire game", detail: "Your ad headline must mirror the exact language they used to search. If they searched 'Zoho CRM setup help', your headline must say 'Zoho CRM Setup — Done For You'. If they searched 'workflow automation consultant', your headline must contain those words. Google's Quality Score and ad rank both depend on relevance between keyword, ad copy, and landing page. Poor alignment = higher CPC and lower position, regardless of your bid." },
-      { name: "ANSWER FIRST — no hooks needed", detail: "Unlike interruption audiences, intent audiences want to know immediately whether your result is the right answer to their search. Lead with your offer and outcome, not a curiosity-gap hook. 'Zoho Workflow Automation — Implemented and Running in 30 Days' is correct for search. 'Are you wasting time on admin?' is wrong — they already know the answer or they wouldn't have searched." },
-      { name: "TRUST SIGNALS in the ad copy itself", detail: "Include concrete social proof, credentials, or specificity directly in your headlines and descriptions — before they even click. 'Zoho Certified Partner — 50+ SMB Implementations' or 'Rated 4.9 Stars — Book Free Assessment Today' builds instant credibility in the 2-second window before they decide to click or scroll past. Numbers and certifications outperform vague claims every time." },
-      { name: "MATCH TYPES control your intent precision", detail: "Exact match [zoho crm automation] = highest intent, lowest volume, most expensive CPC. Phrase match 'zoho workflow help' = moderate precision. Broad match with smart bidding = lets the algorithm detect intent signals you haven't explicitly listed. Start with exact and phrase match only. Add broad match with Target CPA bidding only after accumulating 30+ conversions of historical data." },
+      { name: "KEYWORD ALIGNMENT is the entire game", detail: "Your ad headline must mirror the exact language they used to search. If they searched '{{service}} setup help', your headline must say '{{service}} Setup — Done For You'. If they searched '{{service}} consultant', your headline must contain those words. Google's Quality Score and ad rank both depend on relevance between keyword, ad copy, and landing page. Poor alignment = higher CPC and lower position, regardless of your bid." },
+      { name: "ANSWER FIRST — no hooks needed", detail: "Unlike interruption audiences, intent audiences want to know immediately whether your result is the right answer to their search. Lead with your offer and outcome, not a curiosity-gap hook. '{{service}} — Implemented and Running in 30 Days' is correct for search. 'Are you wasting time on admin?' is wrong — they already know the answer or they wouldn't have searched." },
+      { name: "TRUST SIGNALS in the ad copy itself", detail: "Include concrete social proof, credentials, or specificity directly in your headlines and descriptions — before they even click. '50+ Clients Served — Rated 4.9 Stars' or 'Industry Expert — Book Free Assessment Today' builds instant credibility in the 2-second window before they decide to click or scroll past. Numbers, credentials, and specificity outperform vague claims every time." },
+      { name: "MATCH TYPES control your intent precision", detail: "Exact match [{{service}} automation] = highest intent, lowest volume, most expensive CPC. Phrase match '{{service}} help' = moderate precision. Broad match with smart bidding = lets the algorithm detect intent signals you haven't explicitly listed. Start with exact and phrase match only. Add broad match with Target CPA bidding only after accumulating 30+ conversions of historical data." },
       { name: "LANDING PAGE must continue the exact conversation", detail: "The page they land on after clicking must reflect precisely what your ad promised — not your general homepage or a generic services page. If your ad says 'Free Workflow Audit', your landing page headline must say 'Get Your Free Workflow Audit' in the first 5 words visible above the fold. Any mismatch between ad promise and landing page causes an immediate bounce — it feels like a bait-and-switch even when it isn't intentional." },
       { name: "NEGATIVE KEYWORDS protect every dollar", detail: "Exclude irrelevant searches aggressively and continuously. Add negatives for: 'free' (if you're not free), 'DIY' and 'tutorial' (self-service intent), 'jobs' and 'careers' (job seekers), competitor brand names (unless running competitor campaigns), and geographic exclusions if you don't serve certain areas. Every wasted click to an unqualified searcher is budget that didn't reach a qualified buyer. Review your Search Terms Report weekly." },
     ],
     creative_formula: "Keyword-Matched Headline → Specific Outcome Benefit → Trust Signal or Proof Point → Direct CTA with clear next step",
-    copy_example: "Headline: 'Zoho Workflow Automation — Built & Running in 30 Days' | Description: 'Zoho Certified Partner. 50+ SMB clients automated. Free strategy assessment. No hourly billing — fixed-price systems.' | CTA: 'Book Free Assessment'",
+    copy_example: "Headline: '{{service}} — Built & Running in 30 Days' | Description: 'Trusted by 50+ businesses. Free strategy assessment. No hourly billing — fixed-price systems.' | CTA: 'Book Free Assessment'",
     zoho_tag: "utm_source: google | utm_medium: consideration or solution | Audience: keyword-targeted plus RLSA bid adjustments for warm past visitors",
     fatigue: "LOW — search ads don't fatigue the same way social ads do because the search query refreshes context with every impression. Monitor CTR decline over 90-day periods as a signal to refresh headlines.",
   },
@@ -658,7 +658,7 @@ const AUDIENCE_MODES = [
       { name: "REPURPOSE everything — one idea, many formats", detail: "One detailed LinkedIn case study post → 5 Instagram carousel slides → 3 standalone Twitter/X insights → 1 short-form video script → 1 email newsletter section → 1 blog post. The thinking and research happens once. The distribution multiplies across every platform your audience uses. Build a repurposing workflow into your content system from the beginning — it reduces content creation time by 60% while increasing reach exponentially." },
     ],
     creative_formula: "Insight or Story Hook → Teach the Framework or System → Show the Specific Result → Soft CTA (comment, DM, or link)",
-    copy_example: "\"I mapped out exactly how we cut a client's admin time by 60% using just 3 Zoho automations. Here's the complete system [5-slide carousel with specific workflow steps]. If you want me to map something similar for your business, comment 'AUDIT' below and I'll reach out.\"",
+    copy_example: "\"I mapped out exactly how we cut a client's admin time by 60% using {{service}}. Here's the complete system [5-slide carousel with specific steps]. If you want me to map something similar for your business, comment 'AUDIT' below and I'll reach out.\"",
     zoho_tag: "utm_source: organic_ig or linkedin | utm_medium: awareness or consideration | Track all organic post links via UTM parameters in bio link or post link fields",
     fatigue: "N/A for organic — no frequency cap exists. Monitor engagement rate decline (likes + comments ÷ reach) as the signal to refresh your content angles and topics. If ER drops below 2%, try a new content format or topic pillar.",
   },
@@ -2981,7 +2981,12 @@ function ConstraintDetail({ c }) {
   );
 }
 
-function AudienceDetail({ mode }) {
+function fillService(text, userService) {
+  const name = userService?.trim() || "your product/service";
+  return text.replace(/\{\{service\}\}/g, name);
+}
+
+function AudienceDetail({ mode, userService }) {
   return (
     <div style={{ background: "#040810", border: `1px solid ${mode.hex}25`, borderRadius: 12, padding: 20, marginTop: 8 }} className="fade-in">
       <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: mode.hex, letterSpacing: 2, marginBottom: 12 }}>WHY THIS CHANGES YOUR ENTIRE MARKETING APPROACH</div>
@@ -2993,18 +2998,18 @@ function AudienceDetail({ mode }) {
         {mode.tactics.map((t, i) => (
           <div key={i} style={{ background: "rgba(255,255,255,0.015)", borderRadius: 8, padding: "14px 16px", border: "1px solid rgba(255,255,255,0.05)" }}>
             <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: mode.hex, marginBottom: 6 }}>{i + 1}. {t.name}</div>
-            <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#94a3b8", lineHeight: 1.8 }}>{t.detail}</div>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#94a3b8", lineHeight: 1.8 }}>{fillService(t.detail, userService)}</div>
           </div>
         ))}
       </div>
       <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 12 }}>
         <div style={{ background: `${mode.hex}0a`, borderRadius: 8, padding: "12px 14px", border: `1px solid ${mode.hex}1a` }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: mode.hex, letterSpacing: 2, marginBottom: 6 }}>CREATIVE / COPY FORMULA</div>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#64748b", lineHeight: 1.7 }}>{mode.creative_formula}</div>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#64748b", lineHeight: 1.7 }}>{fillService(mode.creative_formula, userService)}</div>
         </div>
         <div style={{ background: "rgba(245,158,11,0.05)", borderRadius: 8, padding: "12px 14px", border: "1px solid rgba(245,158,11,0.12)" }}>
           <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#f59e0b", letterSpacing: 2, marginBottom: 6 }}>REAL-WORLD COPY EXAMPLE</div>
-          <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#94a3b8", lineHeight: 1.7 }}>{mode.copy_example}</div>
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#94a3b8", lineHeight: 1.7 }}>{fillService(mode.copy_example, userService)}</div>
         </div>
       </div>
       <div className="rg-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
@@ -3049,6 +3054,7 @@ const BrandedFooter = () => (
 
 export default function MarketingStrategyFramework() {
   const [productType, setProductType] = useState(null);
+  const [userService, setUserService] = useState("");
   const [market, setMarket] = useState(null);
   const [expandedMarket, setExpandedMarket] = useState(null);
   const [constraint, setConstraint] = useState(null);
@@ -3102,6 +3108,7 @@ export default function MarketingStrategyFramework() {
   const buildPlanHash = () => {
     if (!productType || !market || !constraint || !budget) return null;
     const payload = { pt: productType, m: market, c: constraint, b: budget };
+    if (userService.trim()) payload.svc = userService.trim();
     if (Object.keys(audienceFunnelPicks).length > 0) {
       payload.ap = {};
       for (const [modeId, pick] of Object.entries(audienceFunnelPicks)) {
@@ -3117,7 +3124,7 @@ export default function MarketingStrategyFramework() {
     if (hash) {
       window.history.replaceState(null, "", `#plan=${hash}`);
     }
-  }, [productType, market, constraint, budget, audienceFunnelPicks]);
+  }, [productType, userService, market, constraint, budget, audienceFunnelPicks]);
 
   // Build the full shareable plan URL
   const planHash = buildPlanHash();
@@ -3125,7 +3132,7 @@ export default function MarketingStrategyFramework() {
 
   // Build Zoho Form URL with plan link as prefill parameter
   const ZOHO_FORM_BASE = "https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU";
-  const zohoFormSrc = planUrl ? `${ZOHO_FORM_BASE}?SingleLine=${encodeURIComponent(planUrl)}` : ZOHO_FORM_BASE;
+  const zohoFormSrc = planUrl ? `${ZOHO_FORM_BASE}?PlanDetails=${encodeURIComponent(planUrl)}` : ZOHO_FORM_BASE;
 
   // ── RESTORE from URL hash on first load ──
   const hasRestoredRef = useRef(false);
@@ -3136,6 +3143,7 @@ export default function MarketingStrategyFramework() {
     try {
       const data = JSON.parse(atob(hash.slice(6)));
       if (data.pt) setProductType(data.pt);
+      if (data.svc) setUserService(data.svc);
       if (data.m)  { setMarket(data.m); setExpandedMarket(data.m); }
       if (data.c)  { setConstraint(data.c); setExpandedConstraint(data.c); }
       if (data.b)  setBudget(data.b);
@@ -3355,6 +3363,29 @@ export default function MarketingStrategyFramework() {
               {!productType && (
                 <div style={{ textAlign: "center", padding: "18px 0 4px", fontFamily: "var(--font-mono)", fontSize: 13, color: "#fb923c", letterSpacing: 2 }}>
                   👆 TAP ONE TO BEGIN
+                </div>
+              )}
+              {productType && (
+                <div style={{ marginTop: 16, padding: "16px 18px", background: "rgba(251,146,60,0.04)", border: "1px solid rgba(251,146,60,0.15)", borderRadius: 10 }}>
+                  <label style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#fb923c", letterSpacing: 2, display: "block", marginBottom: 8 }}>
+                    WHAT DO YOU SELL? (OPTIONAL — PERSONALISES EXAMPLES)
+                  </label>
+                  <input
+                    type="text"
+                    value={userService}
+                    onChange={e => setUserService(e.target.value)}
+                    placeholder="e.g. CRM setup, personal training, handmade candles..."
+                    style={{
+                      width: "100%", padding: "10px 14px", fontFamily: "var(--font-mono)", fontSize: 14,
+                      background: "rgba(0,0,0,0.3)", border: "1px solid rgba(251,146,60,0.2)", borderRadius: 8,
+                      color: "#e2e8f0", outline: "none", letterSpacing: 0.5
+                    }}
+                  />
+                  {userService.trim() && (
+                    <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#94a3b8", marginTop: 6 }}>
+                      Examples throughout will use "<span style={{ color: "#fb923c" }}>{userService.trim()}</span>"
+                    </div>
+                  )}
                 </div>
               )}
               {productType && (
@@ -3580,7 +3611,7 @@ export default function MarketingStrategyFramework() {
 
                         {/* Expanded: audience details — hidden on mobile */}
                         <div className="audience-detail-wrap">
-                          {isExpanded && expandedAudience === mode.id && <AudienceDetail mode={mode} />}
+                          {isExpanded && expandedAudience === mode.id && <AudienceDetail mode={mode} userService={userService} />}
                         </div>
 
                         {/* Inline funnel picker — only for strong-fit modes when expanded */}
