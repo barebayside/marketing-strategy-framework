@@ -4921,26 +4921,99 @@ export default function MarketingStrategyFramework() {
                 );
               })()}
 
-              {/* ═══ REPEATED EMAIL CTA AT BOTTOM ═══ */}
+              {/* ═══ REPEATED EMAIL CTA AT BOTTOM — reversed layout (benefits left, form right) ═══ */}
               <div style={{ marginBottom: 32, marginTop: 16 }}>
                 <div className="email-cta-box" style={{
                   background: "linear-gradient(135deg, rgba(56,189,248,0.10) 0%, rgba(167,139,250,0.10) 50%, rgba(52,211,153,0.10) 100%)",
-                  border: "2px solid rgba(56,189,248,0.35)", borderRadius: 18, padding: "24px 32px 40px", textAlign: "center",
+                  border: "2px solid rgba(56,189,248,0.35)", borderRadius: 18, padding: "20px 28px 24px",
                   boxShadow: "0 0 40px rgba(56,189,248,0.08), 0 0 80px rgba(167,139,250,0.04), inset 0 1px 0 rgba(255,255,255,0.06)"
                 }}>
-                  <div style={{ fontFamily: "var(--font-display)", fontSize: 26, color: "#e2e8f0", letterSpacing: 2, marginBottom: 10 }}>
-                    Get This Plan Emailed To You
-                  </div>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#c4d5e8", lineHeight: 1.9, marginBottom: 24, maxWidth: 540, margin: "0 auto 24px" }}>
-                    Receive your full campaign blueprint, funnel strategies, and Zoho implementation templates.
-                  </div>
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <iframe
-                      aria-label="Marketing Strategy Plan"
-                      frameBorder="0"
-                      style={{ height: 480, width: 340, border: "none", display: "block" }}
-                      src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
-                    />
+                  <div className="cta-split-layout cta-split-reverse" style={{ display: "flex", gap: 0, alignItems: "stretch" }}>
+
+                    {/* LEFT — Benefit cards (reversed from top) */}
+                    <div className="cta-split-right" style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 12, justifyContent: "center" }}>
+                      <div style={{ fontFamily: "var(--font-display)", fontSize: 24, color: "#e2e8f0", letterSpacing: 3, marginBottom: 8, textAlign: "center" }}>
+                        WHAT YOU'LL RECEIVE
+                      </div>
+                      {[
+                        { icon: "📋", title: "YOUR FULL PLAN", desc: "Complete campaign blueprint with all selections, strategies, and engagement paths — ready to action", color: "#38bdf8", premium: false },
+                        { icon: "⚙️", title: "AUTOMATION TEMPLATES", subtitle: "Powered by Zoho", desc: "Pre-built CRM pipelines, Marketing Automation journeys, and email sequences — import directly into your Zoho account", color: "#f5c542", premium: true },
+                        { icon: "🚀", title: "IMPLEMENTATION GUIDE", desc: "Step-by-step setup instructions to launch your campaigns and start generating results with Zoho tools", color: "#f5c542", premium: true },
+                      ].map((item, i) => (
+                        <div key={i} style={{
+                          background: item.premium
+                            ? "linear-gradient(135deg, rgba(245,197,66,0.10) 0%, rgba(245,158,11,0.06) 100%)"
+                            : "var(--surface)",
+                          borderRadius: item.premium ? 14 : 12, padding: "16px 18px",
+                          border: item.premium ? "2px solid rgba(245,197,66,0.35)" : "1px solid rgba(56,189,248,0.15)",
+                          textAlign: "left", position: "relative", overflow: "hidden",
+                          boxShadow: item.premium ? "0 0 20px rgba(245,197,66,0.06), inset 0 1px 0 rgba(255,255,255,0.06)" : "none",
+                        }}>
+                          {item.premium && <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "linear-gradient(90deg, #f5c542, #f59e0b, transparent)" }} />}
+                          <div style={{
+                            position: "absolute", top: 8, right: 8, fontFamily: "var(--font-mono)", fontSize: 9, letterSpacing: 1,
+                            padding: "2px 8px", borderRadius: item.premium ? 20 : 4, fontWeight: "bold",
+                            background: item.premium ? "linear-gradient(135deg, rgba(245,197,66,0.2), rgba(245,158,11,0.12))" : "rgba(56,189,248,0.1)",
+                            color: item.premium ? "#f5c542" : "#38bdf8",
+                            border: `1px solid ${item.premium ? "rgba(245,197,66,0.4)" : "rgba(56,189,248,0.2)"}`,
+                          }}>
+                            {item.premium ? "★ BONUS" : "INCLUDED"}
+                          </div>
+                          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
+                            <span style={{ fontSize: 28 }}>{item.icon}</span>
+                            <div>
+                              <div style={{ fontFamily: "var(--font-display)", fontSize: 20, color: item.premium ? "#f5c542" : "#38bdf8", letterSpacing: 2 }}>{item.title}</div>
+                              {item.subtitle && <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#94a3b8", letterSpacing: 1 }}>{item.subtitle}</div>}
+                            </div>
+                          </div>
+                          <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: item.premium ? "#e2e8f0" : "#c4d5e8", lineHeight: 1.7 }}>{item.desc}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* MIDDLE — "You also get" vertical divider (desktop only) */}
+                    <div className="cta-split-divider" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "0 20px", flexShrink: 0 }}>
+                      <div style={{ width: 3, flex: 1, background: "linear-gradient(180deg, transparent, rgba(52,211,153,0.5))" }} />
+                      <div style={{
+                        background: "linear-gradient(135deg, rgba(52,211,153,0.12), rgba(56,189,248,0.12))",
+                        border: "2px solid rgba(52,211,153,0.35)",
+                        borderRadius: 16, padding: "16px 12px",
+                        boxShadow: "0 0 30px rgba(52,211,153,0.1), 0 0 60px rgba(52,211,153,0.05)",
+                        display: "flex", flexDirection: "column", alignItems: "center", gap: 2,
+                      }}>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "#34d399" }}>+</span>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 20, color: "#34d399", letterSpacing: 3 }}>YOU</span>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 20, color: "#34d399", letterSpacing: 3 }}>ALSO</span>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 20, color: "#34d399", letterSpacing: 3 }}>GET</span>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "#34d399" }}>+</span>
+                      </div>
+                      <div style={{ width: 3, flex: 1, background: "linear-gradient(180deg, rgba(52,211,153,0.5), transparent)" }} />
+                    </div>
+
+                    {/* RIGHT — Form side */}
+                    <div className="cta-split-left" style={{ flex: 1, minWidth: 0 }}>
+                      <div className="email-cta-header" style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 16 }}>
+                        <img className="email-cta-logo" src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 80, objectFit: "contain", opacity: 0.95, flexShrink: 0 }} />
+                        <div style={{ textAlign: "left" }}>
+                          <div style={{ fontFamily: "var(--font-display)", fontSize: 24, color: "#e2e8f0", letterSpacing: 2, marginBottom: 4 }}>
+                            Get This Plan Emailed To You
+                          </div>
+                          <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: "#c4d5e8", lineHeight: 1.6 }}>
+                            Receive your full campaign blueprint and Zoho implementation templates.
+                          </div>
+                        </div>
+                      </div>
+                      <div style={{ display: "flex", justifyContent: "center" }}>
+                        <iframe
+                          aria-label="Marketing Strategy Plan"
+                          frameBorder="0"
+                          scrolling="no"
+                          style={{ height: 480, width: 360, border: "none", display: "block", overflow: "hidden" }}
+                          src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
+                        />
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>

@@ -247,6 +247,11 @@
     flex-direction: column !important;
   }
 
+  /* Reversed bottom CTA: reorder so form comes first on mobile */
+  .cta-split-reverse .cta-split-left {
+    order: -1 !important;
+  }
+
   /* Hide vertical "YOU ALSO GET" divider on mobile */
   .cta-split-divider {
     display: none !important;
