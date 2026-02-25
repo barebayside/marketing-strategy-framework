@@ -4322,23 +4322,27 @@ export default function MarketingStrategyFramework() {
                     </div>
 
                     {/* MIDDLE — "You also get" vertical divider (desktop only) */}
-                    <div className="cta-split-divider" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "0 16px", flexShrink: 0 }}>
+                    <div className="cta-split-divider" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "0 20px", flexShrink: 0 }}>
                       <div style={{ width: 3, flex: 1, background: "linear-gradient(180deg, transparent, rgba(52,211,153,0.5))" }} />
                       <div style={{
                         background: "linear-gradient(135deg, rgba(52,211,153,0.12), rgba(56,189,248,0.12))",
                         border: "2px solid rgba(52,211,153,0.35)",
-                        borderRadius: 40, padding: "12px 14px",
+                        borderRadius: 16, padding: "16px 12px",
                         boxShadow: "0 0 30px rgba(52,211,153,0.1), 0 0 60px rgba(52,211,153,0.05)",
-                        writingMode: "vertical-lr", textOrientation: "mixed",
+                        display: "flex", flexDirection: "column", alignItems: "center", gap: 2,
                       }}>
-                        <span style={{ fontFamily: "var(--font-display)", fontSize: 18, color: "#34d399", letterSpacing: 4 }}>+ YOU ALSO GET +</span>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "#34d399" }}>+</span>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 20, color: "#34d399", letterSpacing: 3 }}>YOU</span>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 20, color: "#34d399", letterSpacing: 3 }}>ALSO</span>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 20, color: "#34d399", letterSpacing: 3 }}>GET</span>
+                        <span style={{ fontFamily: "var(--font-display)", fontSize: 22, color: "#34d399" }}>+</span>
                       </div>
                       <div style={{ width: 3, flex: 1, background: "linear-gradient(180deg, rgba(52,211,153,0.5), transparent)" }} />
                     </div>
 
                     {/* RIGHT — Benefit cards stacked */}
                     <div className="cta-split-right" style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: 12, justifyContent: "center" }}>
-                      <div style={{ fontFamily: "var(--font-display)", fontSize: 18, color: "#e2e8f0", letterSpacing: 2, marginBottom: 4, textAlign: "center" }}>
+                      <div style={{ fontFamily: "var(--font-display)", fontSize: 24, color: "#e2e8f0", letterSpacing: 3, marginBottom: 8, textAlign: "center" }}>
                         WHAT YOU'LL RECEIVE
                       </div>
                       {[
@@ -4365,11 +4369,11 @@ export default function MarketingStrategyFramework() {
                           }}>
                             {item.premium ? "★ BONUS" : "INCLUDED"}
                           </div>
-                          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
-                            <span style={{ fontSize: 22 }}>{item.icon}</span>
+                          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
+                            <span style={{ fontSize: 28 }}>{item.icon}</span>
                             <div>
-                              <div style={{ fontFamily: "var(--font-mono)", fontSize: 13, color: item.premium ? "#f5c542" : "#38bdf8", letterSpacing: 1, fontWeight: "bold" }}>{item.title}</div>
-                              {item.subtitle && <div style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#94a3b8", letterSpacing: 1 }}>{item.subtitle}</div>}
+                              <div style={{ fontFamily: "var(--font-display)", fontSize: 20, color: item.premium ? "#f5c542" : "#38bdf8", letterSpacing: 2 }}>{item.title}</div>
+                              {item.subtitle && <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "#94a3b8", letterSpacing: 1 }}>{item.subtitle}</div>}
                             </div>
                           </div>
                           <div style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: item.premium ? "#e2e8f0" : "#c4d5e8", lineHeight: 1.7 }}>{item.desc}</div>
