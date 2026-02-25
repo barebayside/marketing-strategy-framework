@@ -242,6 +242,30 @@
     text-align: center !important;
   }
 
+  /* CTA split layout → stack vertically on mobile */
+  .cta-split-layout {
+    flex-direction: column !important;
+  }
+
+  /* Hide vertical "YOU ALSO GET" divider on mobile */
+  .cta-split-divider {
+    display: none !important;
+  }
+
+  /* Add horizontal divider + "YOU ALSO GET" text between form and benefits on mobile */
+  .cta-split-right::before {
+    content: "+ YOU ALSO GET +";
+    display: block;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: #34d399;
+    letter-spacing: 3px;
+    padding: 16px 0 8px;
+    margin-top: 8px;
+    border-top: 2px solid rgba(52,211,153,0.25);
+  }
+
   /* Step 04: hide expanded audience detail panel on mobile */
   .audience-detail-wrap {
     display: none !important;
