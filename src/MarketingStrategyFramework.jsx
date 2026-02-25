@@ -4305,7 +4305,7 @@ export default function MarketingStrategyFramework() {
                     <iframe
                       aria-label="Marketing Strategy Plan"
                       frameBorder="0"
-                      style={{ height: 620, width: 340, border: "none", display: "block" }}
+                      style={{ height: 480, width: 340, border: "none", display: "block" }}
                       src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
                     />
                   </div>
@@ -4942,7 +4942,7 @@ export default function MarketingStrategyFramework() {
                     <iframe
                       aria-label="Marketing Strategy Plan"
                       frameBorder="0"
-                      style={{ height: 620, width: 340, border: "none", display: "block" }}
+                      style={{ height: 480, width: 340, border: "none", display: "block" }}
                       src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
                     />
                   </div>
