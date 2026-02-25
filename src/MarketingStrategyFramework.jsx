@@ -4312,11 +4312,11 @@ export default function MarketingStrategyFramework() {
                       ║  • Zoho CRM Web Form: Setup → Web Forms → Embed              ║
                       ║  • Zoho MA: Lead Gen → Forms → Get Embed Code                ║
                       ╚═══════════════════════════════════════════════════════════════╝ */}
-                  <div id="zoho-form-embed" style={{ margin: "0 auto" }}>
+                  <div id="zoho-form-embed" style={{ maxWidth: 340, margin: "0 auto" }}>
                     <iframe
                       aria-label="Marketing Strategy Plan"
                       frameBorder="0"
-                      style={{ height: 500, width: "99%", border: "none" }}
+                      style={{ height: 500, width: "100%", border: "none" }}
                       src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
                     />
                   </div>
@@ -4949,11 +4949,11 @@ export default function MarketingStrategyFramework() {
                   <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#c4d5e8", lineHeight: 1.9, marginBottom: 24, maxWidth: 540, margin: "0 auto 24px" }}>
                     Receive your full campaign blueprint, funnel strategies, and Zoho implementation templates.
                   </div>
-                  <div style={{ margin: "0 auto" }}>
+                  <div style={{ maxWidth: 340, margin: "0 auto" }}>
                     <iframe
                       aria-label="Marketing Strategy Plan"
                       frameBorder="0"
-                      style={{ height: 500, width: "99%", border: "none" }}
+                      style={{ height: 500, width: "100%", border: "none" }}
                       src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
                     />
                   </div>
