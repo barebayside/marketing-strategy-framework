@@ -4290,22 +4290,28 @@ export default function MarketingStrategyFramework() {
               <div style={{ marginBottom: 48 }}>
                 <div className="email-cta-box" style={{
                   background: "linear-gradient(135deg, rgba(56,189,248,0.10) 0%, rgba(167,139,250,0.10) 50%, rgba(52,211,153,0.10) 100%)",
-                  border: "2px solid rgba(56,189,248,0.35)", borderRadius: 18, padding: "24px 32px 40px", textAlign: "center",
+                  border: "2px solid rgba(56,189,248,0.35)", borderRadius: 18, padding: "20px 28px 24px",
                   boxShadow: "0 0 40px rgba(56,189,248,0.08), 0 0 80px rgba(167,139,250,0.04), inset 0 1px 0 rgba(255,255,255,0.06)"
                 }}>
-                  <img className="email-cta-logo" src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 200, objectFit: "contain", marginBottom: -4, opacity: 0.95 }} />
-                  <div style={{ fontFamily: "var(--font-display)", fontSize: 30, color: "#e2e8f0", letterSpacing: 2, marginBottom: 10 }}>
-                    Get This Plan Emailed To You
-                  </div>
-                  <div style={{ fontFamily: "var(--font-mono)", fontSize: 15, color: "#c4d5e8", lineHeight: 1.9, marginBottom: 24, maxWidth: 540, margin: "0 auto 24px" }}>
-                    Receive your full campaign blueprint, funnel strategies, engagement paths, and implementation steps — plus Zoho templates and automation workflows to bring it all to life.
+                  {/* Logo left + text right layout */}
+                  <div className="email-cta-header" style={{ display: "flex", alignItems: "center", gap: 20, marginBottom: 20 }}>
+                    <img className="email-cta-logo" src={`${import.meta.env.BASE_URL}barebayside-logo.png`} alt="Bare Bayside Labs" style={{ height: 100, objectFit: "contain", opacity: 0.95, flexShrink: 0 }} />
+                    <div style={{ textAlign: "left" }}>
+                      <div style={{ fontFamily: "var(--font-display)", fontSize: 28, color: "#e2e8f0", letterSpacing: 2, marginBottom: 6 }}>
+                        Get This Plan Emailed To You
+                      </div>
+                      <div style={{ fontFamily: "var(--font-mono)", fontSize: 14, color: "#c4d5e8", lineHeight: 1.7 }}>
+                        Receive your full campaign blueprint, funnel strategies, and Zoho implementation templates.
+                      </div>
+                    </div>
                   </div>
 
                   <div id="zoho-form-embed" style={{ display: "flex", justifyContent: "center" }}>
                     <iframe
                       aria-label="Marketing Strategy Plan"
                       frameBorder="0"
-                      style={{ height: 480, width: 340, border: "none", display: "block" }}
+                      scrolling="no"
+                      style={{ height: 480, width: 360, border: "none", display: "block", overflow: "hidden" }}
                       src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
                     />
                   </div>

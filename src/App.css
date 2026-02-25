@@ -230,7 +230,16 @@
 
   /* Email CTA container → less horizontal padding */
   .email-cta-box {
-    padding: 16px 14px 32px !important;
+    padding: 16px 14px 24px !important;
+  }
+
+  /* Email CTA header → stack logo above text on mobile */
+  .email-cta-header {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  .email-cta-header > div {
+    text-align: center !important;
   }
 
   /* Step 04: hide expanded audience detail panel on mobile */
