@@ -3616,13 +3616,13 @@ export default function MarketingStrategyFramework() {
                                         </div>
 
                                         {/* Channel + meta — hidden on mobile */}
-                                        <div className="funnel-pick-meta" style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
+                                        <div className="funnel-pick-meta" style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 1, minWidth: 0, maxWidth: "50%" }}>
                                           {ch && (
-                                            <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, padding: "1px 6px", background: `${ch.hex}10`, border: `1px solid ${ch.hex}20`, borderRadius: 3, color: ch.hex, display: "flex", alignItems: "center", gap: 3 }}>
+                                            <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, padding: "1px 6px", background: `${ch.hex}10`, border: `1px solid ${ch.hex}20`, borderRadius: 3, color: ch.hex, display: "flex", alignItems: "center", gap: 3, whiteSpace: "nowrap", flexShrink: 0 }}>
                                               <span style={{ fontSize: 10 }}>{ch.icon}</span> {ch.label}
                                             </span>
                                           )}
-                                          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#475569" }}>
+                                          <span style={{ fontFamily: "var(--font-mono)", fontSize: 10, color: "#475569", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", minWidth: 0 }}>
                                             {funnel.complexity} · {funnel.time_to_build}
                                           </span>
                                           <span style={{ fontFamily: "var(--font-mono)", fontSize: 12, color: isFunnelExpanded ? funnel.hex : "#94a3b8", flexShrink: 0 }}>
