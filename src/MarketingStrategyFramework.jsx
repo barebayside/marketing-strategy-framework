@@ -3098,6 +3098,62 @@ export default function MarketingStrategyFramework() {
     }
   }, [audienceFunnelPicks, productType, market, constraint, budget]);
 
+  // ── SHAREABLE PLAN LINK — encode selections into URL hash ──
+  const buildPlanHash = () => {
+    if (!productType || !market || !constraint || !budget) return null;
+    const payload = { pt: productType, m: market, c: constraint, b: budget };
+    if (Object.keys(audienceFunnelPicks).length > 0) {
+      payload.ap = {};
+      for (const [modeId, pick] of Object.entries(audienceFunnelPicks)) {
+        payload.ap[modeId] = { f: pick.funnelId, c: pick.channelId };
+      }
+    }
+    return btoa(JSON.stringify(payload));
+  };
+
+  // Update hash whenever selections change (only when plan is complete enough)
+  useEffect(() => {
+    const hash = buildPlanHash();
+    if (hash) {
+      window.history.replaceState(null, "", `#plan=${hash}`);
+    }
+  }, [productType, market, constraint, budget, audienceFunnelPicks]);
+
+  // Build the full shareable plan URL
+  const planHash = buildPlanHash();
+  const planUrl = planHash ? `${window.location.origin}${window.location.pathname}#plan=${planHash}` : "";
+
+  // Build Zoho Form URL with plan link as prefill parameter
+  const ZOHO_FORM_BASE = "https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU";
+  const zohoFormSrc = planUrl ? `${ZOHO_FORM_BASE}?SingleLine=${encodeURIComponent(planUrl)}` : ZOHO_FORM_BASE;
+
+  // ── RESTORE from URL hash on first load ──
+  const hasRestoredRef = useRef(false);
+  useEffect(() => {
+    if (hasRestoredRef.current) return;
+    const hash = window.location.hash;
+    if (!hash.startsWith("#plan=")) return;
+    try {
+      const data = JSON.parse(atob(hash.slice(6)));
+      if (data.pt) setProductType(data.pt);
+      if (data.m)  { setMarket(data.m); setExpandedMarket(data.m); }
+      if (data.c)  { setConstraint(data.c); setExpandedConstraint(data.c); }
+      if (data.b)  setBudget(data.b);
+      if (data.ap) {
+        const picks = {};
+        for (const [modeId, pick] of Object.entries(data.ap)) {
+          picks[modeId] = { funnelId: pick.f, channelId: pick.c };
+        }
+        setAudienceFunnelPicks(picks);
+      }
+      // Go straight to the plan view
+      setActiveTab("your_plan");
+      hasRestoredRef.current = true;
+    } catch (e) {
+      // Invalid hash — ignore silently
+    }
+  }, []);
+
   const selectMarket = (id) => {
     if (market === id) {
       setExpandedMarket(v => v === id ? null : id);
@@ -4316,7 +4372,7 @@ export default function MarketingStrategyFramework() {
                           frameBorder="0"
                           scrolling="no"
                           style={{ height: 480, width: 360, border: "none", display: "block", overflow: "hidden" }}
-                          src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
+                          src={zohoFormSrc}
                         />
                       </div>
                     </div>
@@ -5009,7 +5065,7 @@ export default function MarketingStrategyFramework() {
                           frameBorder="0"
                           scrolling="no"
                           style={{ height: 480, width: 360, border: "none", display: "block", overflow: "hidden" }}
-                          src="https://forms.zohopublic.com.au/BareBayside/form/MarketingStrategyPlan/formperma/Z9n_8AH8roKJwwytph9c6fa6LtmzxWOZQfRtCVnuhiU"
+                          src={zohoFormSrc}
                         />
                       </div>
                     </div>
